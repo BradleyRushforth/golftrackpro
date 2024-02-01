@@ -1,8 +1,9 @@
 // App.tsx
 import React from 'react';
 import BackgroundApp from './frontends/background/background';
-import Navbar from './frontends/navbar/navbar';
-import InfoComponent from './frontends/info/infoComponent';
+import Navbar from './frontends/homepage/navbar/navbar';
+import InfoComponent from './frontends/homepage/info/infoComponent';
+import ScrollDown from './frontends/homepage/info/scrollDown/scrollDown';
 
 const App: React.FC = () => {
   return (
@@ -14,6 +15,7 @@ const App: React.FC = () => {
         <a href="#">About</a>
         <a href="#">Team</a>
       </Navbar>
+      <ScrollDown />
     </div>
   );
 };

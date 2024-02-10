@@ -1,22 +1,23 @@
-// App.tsx
 import React from 'react';
-import BackgroundApp from './frontends/background/background';
-import Navbar from './frontends/homepage/navbar/navbar';
-import InfoComponent from './frontends/homepage/info/infoComponent';
-import ScrollDown from './frontends/homepage/info/scrollDown/scrollDown';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import NavBar from './frontends/home/navbar/navbar';
+import routes from './routes';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import BackgroundApp from './shared/background/background';
 
-const App: React.FC = () => {
+const App = () => {
   return (
-    <div className='app-container'>
-      <InfoComponent />
+    <Router>
       <BackgroundApp />
-      <Navbar className="navbar" activeIndex={0}>
-        <a href="#">Courses</a>
-        <a href="#">About</a>
-        <a href="#">Team</a>
-      </Navbar>
-      <ScrollDown />
-    </div>
+      <NavBar />
+      <div className="container mt-4">
+        <Routes>
+          {routes.map((route, index) => (
+            <Route key={index} path={route.path} element={route.component} />
+          ))}
+        </Routes>
+      </div>
+    </Router>
   );
 };
 

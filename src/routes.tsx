@@ -1,5 +1,6 @@
-import Home from "./frontends/home/home"
-import Plans from "./frontends/plans/plans"
+import Home from "./frontends/gtp-home/home"
+import Plans from "./frontends/gtp-stock-yardages/plans"
+
 
 
 const routes = [

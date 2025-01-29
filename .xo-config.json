@@ -1,0 +1,15 @@
+{
+    "prettier": true,
+    "typescript": true,
+    "semicolon": false,
+    "space": true,
+    "rules": {
+      "arrow-body-style": ["error", "as-needed"],
+      "no-console": "warn",
+      "indent": ["error", 2],
+      "max-len": ["error", { "code": 120 }],
+      "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+      "react/react-in-jsx-scope": "off"
+    }
+  }
+  

@@ -1,27 +1,22 @@
-import React from "react";
-import './navbar.css'
+import React from 'react'
+import Grid from '@mui/material/Grid'
+import Button from '@mui/material/Button'
 
-const Navbar = () => {
-  return (
-    <nav className="navbar">
-      <div className="container-fluid">
-        <a className="navbar-brand" href="/">
-          Virtwine
-        </a>
-        <div className="d-flex">
-          <a className="nav-link" href="/plans">
-            Plans
-          </a>
-          <a className="nav-link" href="/about">
-            About
-          </a>
-          <a className="nav-link" href="/contact">
-            Contact
-          </a>
-        </div>
-      </div>
-    </nav>
-  );
-};
+const Navbar = () => (
+  <Grid container alignItems="center" justifyContent="space-between">
+    <Grid item xs={9}>
+      <Button href="/">Golf Track Pro</Button>
+    </Grid>
+    <Grid item xs={1}>
+      <Button href="/plans">Stock Yardages</Button>
+    </Grid>
+    <Grid item xs={1}>
+      <Button href="/about">Handicap</Button>
+    </Grid>
+    <Grid item xs={1}>
+      <Button href="/contact">Academy</Button>
+    </Grid>
+  </Grid>
+)
 
-export default Navbar;
+export default Navbar

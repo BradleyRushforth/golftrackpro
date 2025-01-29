@@ -1,5 +1,5 @@
-import PricingCard from "./component/pricingCard";
-import "./styles/PricingApp.css";
+import PricingCard from './component/pricing-card'
+import './styles/PricingApp.css'
 
 function Plans() {
   return (
@@ -33,7 +33,7 @@ function Plans() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default Plans;
+export default Plans

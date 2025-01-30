@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.2](https://github.com/BradleyRushforth/golftrackpro/compare/v0.1.1...v0.1.2) (2025-01-30)
+
+
+### Features
+
+* Updated and Removed Packages ([6aa9311](https://github.com/BradleyRushforth/golftrackpro/commit/6aa931126517bf88d64c49df12ff858b3a56a821))
+* Updated and Removed Packages ([49d610c](https://github.com/BradleyRushforth/golftrackpro/commit/49d610ce8385ebbb45b88e41bb047861f11abea1))
+
 ### 0.1.1 (2025-01-30)
 
 

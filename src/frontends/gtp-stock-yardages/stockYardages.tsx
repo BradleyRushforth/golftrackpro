@@ -1,7 +1,7 @@
 import PricingCard from './component/pricing-card'
 import './styles/PricingApp.css'
 
-function Plans() {
+export function StockYardages() {
   return (
     <div className="PricingApp">
       <div className="app-container">
@@ -35,5 +35,3 @@ function Plans() {
     </div>
   )
 }
-
-export default Plans

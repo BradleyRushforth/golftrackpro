@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchGolfCourses } from '../../../shared/golfcourseapi/golfCourseService';
-import { IGolfCourse, ITee } from '../../../shared/golfcourseapi/interfaces';
+import { IGolfCourse, ITee } from '../../../shared/golfcourseapi/interfaces/index';
 
 export const GolfCourses: React.FC = () => {
   const [golfCourses, setGolfCourses] = useState<IGolfCourse[]>([]);

@@ -1,37 +1,10 @@
-import PricingCard from './component/pricing-card'
-import './styles/PricingApp.css'
+import { Grid2, Typography } from '@mui/material'
+import React from 'react'
 
 export function StockYardages() {
   return (
-    <div className="PricingApp">
-      <div className="app-container">
-        <header>
-          <h1 className="header-topic">Pricing Plans</h1>
-        </header>
-        <div className="pricing-cards">
-          <PricingCard
-            title="Standard"
-            price={'£1.99'}
-            access="Unlimited access to all CPD courses, materials, and resources."
-            features="Mobile App Access"
-            extras="3 Added Extras"
-          />
-          <PricingCard
-            title="Ultimate"
-            price={'£6.99'}
-            access="Unlimited access to all CPD courses, materials, and resources."
-            features="Mobile App Access"
-            extras="13 Bonus Features"
-          />
-          <PricingCard
-            title="Premium"
-            price={'£3.99'}
-            access="Unlimited access to all CPD courses, materials, and resources."
-            features="Mobile App Access"
-            extras="8 Added Extras"
-          />
-        </div>
-      </div>
-    </div>
+    <Grid2 container>
+    <Typography color='#FFFFFF' fontSize={'60px'}>Stock Yardages</Typography>
+    </Grid2>
   )
 }

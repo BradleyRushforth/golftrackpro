@@ -3,8 +3,6 @@ import axios from 'axios';
 const API_URL = 'https://api.golfcourseapi.com/v1/courses';
 const API_KEY = 'Key C4R4UF2N5PELS4N4KFC3YGEHMM';
 
-console.log(API_KEY);
-
 export const fetchGolfCourses = async () => {
   try {
     const response = await axios.get(API_URL, {

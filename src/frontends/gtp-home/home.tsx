@@ -1,11 +1,13 @@
+import React from 'react'
 import { Button, Grid2, Typography } from '@mui/material'
-import type React from 'react'
+import { Background } from '../../shared/background/background'
 
 
 const Home: React.FC = () => {
   
-  
   return(
+    <>
+    <Background />
     <Grid2 container pl={2}>
       <Grid2
         size={4} 
@@ -30,6 +32,7 @@ const Home: React.FC = () => {
         </Button>
       </Grid2>
     </Grid2>
+    </>
   )}
 
 export default Home

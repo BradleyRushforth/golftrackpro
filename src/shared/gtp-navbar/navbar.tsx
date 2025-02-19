@@ -1,18 +1,29 @@
 import React from 'react'
-import Button from '@mui/material/Button'
-import { Grid2, Typography } from '@mui/material'
+import { Box, Grid2, Button } from '@mui/material'
 
 export const Navbar = () => {
   
   const defaultStyling = {
-    fontSize: '40px',
+    fontSize: '35px',
     color: '#FFFFFF'
   }
   
   return (
-    <Grid2 container alignItems="center"justifyContent="space-between" px={2}>
+    <Grid2 
+    container
+    alignItems="center"
+    justifyContent="space-between"
+    sx={{
+       backgroundColor:'#1F5132'
+    }}>
       <Grid2 size={8} display="flex" justifyContent="flex-start">
-        <Button href="/" sx={defaultStyling}>Golf Track Pro</Button>
+        <Button href="/" sx={defaultStyling}>
+        <Box component="img" src={`${process.env.PUBLIC_URL}/assets/logo.png`}
+        sx={{ 
+          width: '50px',
+          height: 'auto'
+        }} />
+        </Button>
       </Grid2>
 
       <Grid2 size={4} display="flex" justifyContent="flex-end" columnGap={4}>

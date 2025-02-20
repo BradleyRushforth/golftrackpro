@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import routes from './routes/routes';
 import { Navbar } from './shared/gtp-navbar/navbar';
 import '@fontsource/staatliches';
-import { createTheme, ThemeProvider } from '@mui/material';
+import { Box, createTheme, ThemeProvider } from '@mui/material';
 import Backdrop from './shared/backdrop/backdrop';
 
 const theme = createTheme({
@@ -15,14 +15,16 @@ const theme = createTheme({
 const App = () => {
   return (
       <ThemeProvider theme={theme}>
-        <Backdrop color="#F5F5F5" />
+        <Backdrop color="#F4FBF7" />
         <Router>
           <Navbar />
-          <Routes>
-            {routes.map((route, index) => (
-              <Route key={index} path={route.path} element={route.component} />
-            ))}
-          </Routes>
+          <Box sx={{pt: '80px'}}>
+            <Routes>
+              {routes.map((route, index) => (
+                <Route key={index} path={route.path} element={route.component} />
+              ))}
+            </Routes>
+          </Box>
         </Router>
       </ThemeProvider>
   );

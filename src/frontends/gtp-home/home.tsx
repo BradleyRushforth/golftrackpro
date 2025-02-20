@@ -17,12 +17,12 @@ const Home: React.FC = () => {
         alignItems="flex-start"
         sx={{
           textAlign: 'left', 
-          minHeight: '100vh',  // Ensures full height and prevents overflow
-          paddingLeft: 2, // Optional, add some padding to the left
+          minHeight: '80vh',
+          paddingLeft: 2,
         }}
       >
         <Typography sx={{
-          fontSize: '100px',
+          fontSize: '80px',
           color: '#FFFFFF'
         }}>
           AI-Powered Golf Performance, Simplified

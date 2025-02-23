@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.7](https://github.com/BradleyRushforth/golftrackpro/compare/v0.1.6...v0.1.7) (2025-02-23)
+
+
+### Bug Fixes
+
+* setup club settings page + navigation logic to render out options when logged in ([b0437b7](https://github.com/BradleyRushforth/golftrackpro/commit/b0437b7c0b34995ffc4d1d0fc77a1510d92b4327))
+
 ### [0.1.6](https://github.com/BradleyRushforth/golftrackpro/compare/v0.1.5...v0.1.6) (2025-02-23)
 
 

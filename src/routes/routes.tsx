@@ -5,9 +5,9 @@ import { StockYardages } from "../frontends/gtp-stock-yardages/stockYardages"
 import Academy from "../frontends/gtp-academy/academy"
 import Register from "../frontends/gtp-register/register"
 import Login from "../frontends/gtp-login/login"
-import Logout from "../shared/Auth/components/logout"
 import ClubSettings from "../frontends/gtp-user-profile/pages/club-settings/club-settings"
 import Profile from "../frontends/gtp-user-profile/profile"
+import { Logout } from "../shared/Auth/components/logout"
 
 const routes = [
   {path: '/', component: <Home />, exact: true},

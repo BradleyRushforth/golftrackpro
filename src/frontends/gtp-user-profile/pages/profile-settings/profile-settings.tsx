@@ -21,7 +21,6 @@ const ProfileSettings = () => {
     postcode: "",
   });   
 
-  const [isEditing, setIsEditing] = useState(false);
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
 
   useEffect(() => {
@@ -150,7 +149,6 @@ const ProfileSettings = () => {
           onChange={handleChange} 
           required 
           fullWidth
-          disabled={!isEditing} 
           sx={{
             ...textFieldFontStyles,
             ...height
@@ -318,6 +316,7 @@ const ProfileSettings = () => {
         disabled={isSaveDisabled} 
         fullWidth
         sx={{
+          ...font,
           backgroundColor: '#1F5132',
           height: '55px',
         }}>

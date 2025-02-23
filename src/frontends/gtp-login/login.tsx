@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import { LoginToast } from "./utils/toastAlerts";
 import { loginUser } from "../../shared/Auth/services/authService";
 import { LoginDialog } from "./components/loginDialog";
+import { useNavigate } from "react-router-dom";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  // Use the toast notification system
+  const navigate = useNavigate();
+
   const {
     handleLoginSuccess,
     handleLoginFailure,
@@ -20,7 +22,7 @@ const Login: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError(""); // Reset error message
+    setError("");
 
     if (!email || !password) {
       setError("Email and password cannot be empty.");
@@ -30,10 +32,12 @@ const Login: React.FC = () => {
 
     try {
       await loginUser(email, password);
-      handleLoginSuccess(); // Show success message
+      handleLoginSuccess();
+
+      navigate('/');  
     } catch (err: any) {
       setError(err.message);
-      handleLoginFailure(err.message); // Show failure message
+      handleLoginFailure(err.message);
     }
   };
 

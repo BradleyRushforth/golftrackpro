@@ -9,7 +9,7 @@ interface UserProfile {
   email: string;
   dateOfBirth: string;
   country: string;
-  phoneNumber: string;
+  mobileNumber: string;
   clubs?: Record<string, string>;
 }
 

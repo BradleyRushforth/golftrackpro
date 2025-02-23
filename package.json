@@ -5,7 +5,11 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
+    "@firebase/app": "^0.11.1",
+    "@firebase/auth": "^1.9.0",
+    "@firebase/firestore": "^4.7.8",
     "@fontsource/staatliches": "^5.1.1",
+    "@mui/icons-material": "^6.4.5",
     "@mui/material": "^6.4.2",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
@@ -46,6 +50,6 @@
     "commitizen": "^4.3.1",
     "eslint-config-react-app": "^7.0.1",
     "standard-version": "^9.5.0",
-    "typescript": "^4.9.5"
+    "typescript": "^4.6.2"
   }
 }

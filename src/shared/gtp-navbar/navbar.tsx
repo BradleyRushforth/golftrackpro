@@ -34,6 +34,8 @@ export const Navbar = () => {
         <Button href="/academy" sx={goldGradientStyle}>Academy</Button>
         <Button href="/register" sx={goldGradientStyle}>Register</Button>
         <Button href="/login" sx={goldGradientStyle}>Login</Button>
+        <Button href="/profile" sx={goldGradientStyle}>Profile</Button>
+        <Button href="/logout" sx={goldGradientStyle}>Logout</Button>
       </Grid2>
     </Grid2>
 )}

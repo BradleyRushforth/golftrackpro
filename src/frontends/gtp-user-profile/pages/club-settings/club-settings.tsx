@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { doc, updateDoc, getDoc } from "firebase/firestore";
-import { auth, db } from "../../../shared/Auth/services/firebaseConfig";
+import { auth, db } from "../../../../shared/Auth/services/firebaseConfig";
 
-const Clubs: React.FC = () => {
+const ClubSettings: React.FC = () => {
   const [clubs, setClubs] = useState({
     driver: "",
     wood3: "",
@@ -102,4 +102,4 @@ const Clubs: React.FC = () => {
   );
 };
 
-export default Clubs;
+export default ClubSettings;

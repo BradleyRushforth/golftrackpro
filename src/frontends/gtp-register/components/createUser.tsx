@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { registerUser } from "../../../shared/Auth/services/authService";
 import { RegisterDialog } from "./registerDialog";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc, serverTimestamp } from "firebase/firestore";
+import { auth, db } from "../../../shared/Auth/services/firebaseConfig";
 
 const CreateUser: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -9,13 +11,35 @@ const CreateUser: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+  
     try {
-      await registerUser(email, password, username);
-      alert("User registered successfully!");
+      if (!email || !username || !password) {
+        alert('All fields are required!');
+        return;
+      }
+  
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+  
+      const userRef = doc(db, 'users', user.uid);
+      await setDoc(userRef, {
+        firstName: null,
+        lastName: null,
+        username: user.displayName,
+        email: user.email,
+        mobileNumber: null,
+        homeTelephone: null,
+        jobTitle: null,
+        dateOfBirth: null,
+        country: null,
+        address: null,
+        postcode: null,
+        profilePicture: null,
+        createdAt: serverTimestamp(),
+        clubs: [],
+      });
     } catch (error) {
-      console.error("Registration failed:", error);
-      alert("Error registering user");
+      console.error('Error creating account:', error);
     }
   };
 

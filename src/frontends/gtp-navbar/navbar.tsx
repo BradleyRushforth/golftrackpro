@@ -96,8 +96,8 @@ export const Navbar = () => {
               </>
             ) : (
               <>
-                <Button component={Link} to="/register" sx={{ ...goldGradientStyle, fontSize: '18px' }}>Register</Button>
-                <Button component={Link} to="/login" sx={{ ...goldGradientStyle, fontSize: '18px' }}>Login</Button>
+                <Button component={Link} to="/register" sx={{ ...goldGradientStyle, fontSize: '30px' }}>Register</Button>
+                <Button component={Link} to="/login" sx={{ ...goldGradientStyle, fontSize: '30px' }}>Login</Button>
               </>
             )}
           </Grid2>

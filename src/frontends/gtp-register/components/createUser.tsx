@@ -36,7 +36,6 @@ const CreateUser: React.FC = () => {
         postcode: null,
         profilePicture: null,
         createdAt: serverTimestamp(),
-        clubs: [],
       });
     } catch (error) {
       console.error('Error creating account:', error);

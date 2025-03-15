@@ -22,7 +22,7 @@ export const Logout = () => {
     <Button onClick={handleLogout} href="/" sx={goldGradientStyle}>
       <LogoutIcon
         sx={{
-          fontSize: '35px',
+          fontSize: '30px',
           fill: 'url(#gold-gradient)',
         }}
       />

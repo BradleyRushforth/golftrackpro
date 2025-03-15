@@ -79,7 +79,7 @@ export default function ProfileCard() {
         display: 'flex',
         maxWidth: 1500, 
         height: '700px',
-        boxShadow: '0px 4px 12px #C8E6C9',
+        boxShadow: '0px 0px 20px #C8E6C9',
         borderRadius: 8,
         my: 8,
         mx: 'auto'
@@ -189,7 +189,8 @@ export default function ProfileCard() {
           borderTopRightRadius: 30,
           borderBottomRightRadius: 30,  
           boxShadow: 'none',
-          ml: '20%'
+          ml: '20%',
+          overflow: 'auto'
         }}>
         <CardContent>
           {selectedOption === "profile" ? <ProfileSettings /> : <ClubSettings />}

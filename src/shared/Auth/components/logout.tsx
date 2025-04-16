@@ -23,19 +23,9 @@ export const Logout = () => {
       <LogoutIcon
         sx={{
           fontSize: '30px',
-          fill: 'url(#gold-gradient)',
+          color: '#FFFFFF',
         }}
       />
-      <svg width="0" height="0">
-        <defs>
-          <linearGradient id="gold-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#FFD700" />
-            <stop offset="25%" stopColor="#FFC700" />
-            <stop offset="50%" stopColor="#FFE08A" />
-            <stop offset="100%" stopColor="#B8860B" />
-          </linearGradient>
-        </defs>
-      </svg>
     </Button>
   )
 }

@@ -1,6 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { fetchGolfCourses } from '../../../shared/golfcourseapi/golfCourseService';
-import { IGolfCourse, ITee } from '../../../shared/golfcourseapi/interfaces/index';
+import React, { useEffect, useState } from "react";
+import { fetchGolfCourses } from "../../../shared/golfcourseapi/golfCourseService";
+import {
+  IGolfCourse,
+  IHole,
+  ITee,
+} from "../../../shared/golfcourseapi/interfaces/index";
 
 export const GolfCourses: React.FC = () => {
   const [golfCourses, setGolfCourses] = useState<IGolfCourse[]>([]);
@@ -13,7 +17,7 @@ export const GolfCourses: React.FC = () => {
         const data = await fetchGolfCourses();
         setGolfCourses(data);
       } catch (error) {
-        setError('Failed to load golf courses.');
+        setError("Failed to load golf courses.");
       } finally {
         setLoading(false);
       }
@@ -57,6 +61,16 @@ export const GolfCourses: React.FC = () => {
                 <div key={index}>
                   <p>Tee Color: {tee.tee_name}</p>
                   <p>Total Yardage: {tee.total_yards}</p>
+                </div>
+              ))}
+            </div>
+
+            <div>
+              <h4>Holes</h4>
+              {course.holes?.map((hole: IHole, index) => (
+                <div key={index}>
+                  <p>Par: {hole.par}</p>
+                  <p>Total Yardage: {hole.yardage}</p>
                 </div>
               ))}
             </div>

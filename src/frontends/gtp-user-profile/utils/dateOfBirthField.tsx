@@ -6,7 +6,10 @@ interface DateOfBirthFieldProps {
   onChange: any;
 }
 
-const DateOfBirthField: React.FC<DateOfBirthFieldProps> = ({ value, onChange }) => {
+const DateOfBirthField: React.FC<DateOfBirthFieldProps> = ({
+  value,
+  onChange,
+}) => {
   const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let val = event.target.value;
 
@@ -29,7 +32,10 @@ const DateOfBirthField: React.FC<DateOfBirthFieldProps> = ({ value, onChange }) 
 
   return (
     <>
-      <Typography variant="body1" sx={{ ...font, color: "#1F5132", marginBottom: "8px", pl: 1 }}>
+      <Typography
+        variant="body1"
+        sx={{ ...font, color: "#183D26", marginBottom: "8px", pl: 1 }}
+      >
         Date of Birth
       </Typography>
       <TextField
@@ -39,7 +45,11 @@ const DateOfBirthField: React.FC<DateOfBirthFieldProps> = ({ value, onChange }) 
         onChange={handleDateChange}
         fullWidth
         error={value.length > 0 && !isValidDate(value)}
-        helperText={value.length > 0 && !isValidDate(value) ? "Enter a valid date (DD/MM/YYYY)" : ""}
+        helperText={
+          value.length > 0 && !isValidDate(value)
+            ? "Enter a valid date (DD/MM/YYYY)"
+            : ""
+        }
         sx={{
           "& .MuiInputBase-input": { fontFamily: "'Spline Sans', sans-serif" },
           "& .MuiInputLabel-root": { fontFamily: "'Spline Sans', sans-serif" },

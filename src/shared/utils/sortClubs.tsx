@@ -1,25 +1,25 @@
-import React from 'react';
+import React from "react";
 
 export const useSortClubs = (clubs: any[]) => {
-  const clubOrder = ["Driver", "Wood", "Iron", "Wedge", "Putter"];
+  const clubOrder = ["Driver", "Wood", "Hybrid", "Iron", "Wedge", "Putter"];
 
   return [...clubs].sort((a, b) => {
-    // Sort by club type first
-    const typeComparison = clubOrder.indexOf(a.clubType) - clubOrder.indexOf(b.clubType);
+    const aClubType = a.clubType.charAt(0).toUpperCase() + a.clubType.slice(1);
+    const bClubType = b.clubType.charAt(0).toUpperCase() + b.clubType.slice(1);
+
+    const typeComparison =
+      clubOrder.indexOf(aClubType) - clubOrder.indexOf(bClubType);
     if (typeComparison !== 0) return typeComparison;
 
-    // Now, we handle sorting by club number for "Iron" and "Wedge"
-    if (a.clubType === "Iron" || a.clubType === "Wedge") {
+    if (aClubType === "Iron" || aClubType === "Wedge") {
       const getClubNumber = (club: any) => {
         const clubNumber = club.setConfiguration[0]?.clubNumber;
         if (!clubNumber) return 0;
 
-        // Extract numeric value (handle both for "PW", "SW", etc.)
         if (clubNumber === "PW" || clubNumber === "SW") {
-          return 100;  // Putter and Wedges will have a higher value to be placed last
+          return 100;
         }
 
-        // Extract the number from the club (e.g., "5i", "6i", "3i" etc.)
         const match = clubNumber.match(/(\d+)/);
         return match ? parseInt(match[0], 10) : 0;
       };
@@ -27,11 +27,9 @@ export const useSortClubs = (clubs: any[]) => {
       const aClubNumber = getClubNumber(a);
       const bClubNumber = getClubNumber(b);
 
-      // Sort by the numeric club number for Iron and Wedge clubs
       return aClubNumber - bClubNumber;
     }
 
-    // If it's not an Iron or Wedge, no need to sort by number (Driver, Wood, Putter)
     return 0;
   });
 };

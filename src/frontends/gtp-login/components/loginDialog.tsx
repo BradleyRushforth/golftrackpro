@@ -1,5 +1,15 @@
 import React from "react";
-import { Alert, Button, Card, Grid, Grid2, Link, Snackbar, TextField, Typography } from "@mui/material";
+import {
+  Alert,
+  Button,
+  Card,
+  Grid,
+  Grid2,
+  Link,
+  Snackbar,
+  TextField,
+  Typography,
+} from "@mui/material";
 
 interface ILoginDialog {
   email: string;
@@ -26,68 +36,72 @@ export const LoginDialog: React.FC<ILoginDialog> = ({
   snackbarMessage,
   snackbarSeverity,
 }) => {
-
   const font = {
     fontFamily: "'Spline Sans', sans-serif",
   };
 
   const textFieldFontStyles = {
-    '& .MuiInputBase-input': {
+    "& .MuiInputBase-input": {
       fontFamily: "'Spline Sans', sans-serif",
     },
-    '& .MuiInputLabel-root': {
+    "& .MuiInputLabel-root": {
       fontFamily: "'Spline Sans', sans-serif",
     },
   };
 
   return (
-    <Grid2 display={'flex'} justifyContent={'center'} alignItems={'center'} minHeight={'80vh'}>
+    <Grid2
+      display={"flex"}
+      justifyContent={"center"}
+      alignItems={"center"}
+      minHeight={"80vh"}
+    >
       <Card
         sx={{
-          display: 'grid',
-          gridTemplateColumns: '3fr 2fr',
-          height: '650px',
+          display: "grid",
+          gridTemplateColumns: "3fr 2fr",
+          height: "650px",
           mt: 4,
-          width: '60%',
+          width: "60%",
           borderRadius: 5,
         }}
       >
         <Grid2
           size={12}
           sx={{
-            backgroundImage: 'url(/images/login-image.jpg)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            height: '100%',
+            backgroundImage: "url(/images/login-image.jpg)",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            height: "100%",
           }}
         />
         <Grid2
           size={12}
           sx={{
             padding: 4,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: '100%',
-            flexDirection: 'column',
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100%",
+            flexDirection: "column",
           }}
         >
-          <Grid2 size={12} sx={{ textAlign: 'left' }}>
+          <Grid2 size={12} sx={{ textAlign: "left" }}>
             <Typography variant="h4" sx={font}>
               Welcome Back!
             </Typography>
           </Grid2>
           <Grid2 size={12}>
-            <Typography variant="body2" sx={{ ...font, fontSize: '14px' }}>
-              Don't have an account?{' '}
+            <Typography variant="body2" sx={{ ...font, fontSize: "14px" }}>
+              Don't have an account?{" "}
               <Link
                 href="/register"
                 sx={{
                   ...font,
-                  textDecoration: 'underline',
-                  color: '#1F5132',
-                  '&:hover': {
-                    color: '#3D9F6A',
+                  textDecoration: "underline",
+                  color: "#183D26",
+                  "&:hover": {
+                    color: "#3D9F6A",
                   },
                 }}
               >
@@ -95,24 +109,37 @@ export const LoginDialog: React.FC<ILoginDialog> = ({
               </Link>
             </Typography>
           </Grid2>
-          <Grid2 container size={12} gap={2} mt={3} direction="column" alignItems="center">
+          <Grid2
+            container
+            size={12}
+            gap={2}
+            mt={3}
+            direction="column"
+            alignItems="center"
+          >
             {error && (
-              <Alert severity="error" sx={{ width: '320px', boxSizing: 'border-box' }}>
+              <Alert
+                severity="error"
+                sx={{ width: "320px", boxSizing: "border-box" }}
+              >
                 {error}
               </Alert>
             )}
             <Grid2 size={12}>
-              <Typography variant="body1" sx={{ ...font, color: '#1F5132', marginBottom: '8px' }} >
+              <Typography
+                variant="body1"
+                sx={{ ...font, color: "#183D26", marginBottom: "8px" }}
+              >
                 Email Address
               </Typography>
               <TextField
                 placeholder="Email Address"
                 sx={{
                   ...textFieldFontStyles,
-                  width: '320px',
-                  '& .MuiOutlinedInput-root': {
-                    '&.Mui-focused fieldset': {
-                      borderColor: '#1F5132',
+                  width: "320px",
+                  "& .MuiOutlinedInput-root": {
+                    "&.Mui-focused fieldset": {
+                      borderColor: "#183D26",
                     },
                   },
                 }}
@@ -122,7 +149,10 @@ export const LoginDialog: React.FC<ILoginDialog> = ({
               />
             </Grid2>
             <Grid2 size={12}>
-              <Typography variant="body1" sx={{ ...font, color: '#1F5132', marginBottom: '8px' }} >
+              <Typography
+                variant="body1"
+                sx={{ ...font, color: "#183D26", marginBottom: "8px" }}
+              >
                 Password
               </Typography>
               <TextField
@@ -130,10 +160,10 @@ export const LoginDialog: React.FC<ILoginDialog> = ({
                 placeholder="Password"
                 sx={{
                   ...textFieldFontStyles,
-                  width: '320px',
-                  '& .MuiOutlinedInput-root': {
-                    '&.Mui-focused fieldset': {
-                      borderColor: '#1F5132',
+                  width: "320px",
+                  "& .MuiOutlinedInput-root": {
+                    "&.Mui-focused fieldset": {
+                      borderColor: "#183D26",
                     },
                   },
                 }}
@@ -148,17 +178,25 @@ export const LoginDialog: React.FC<ILoginDialog> = ({
             <Button
               variant="contained"
               sx={{
-                width: '320px',
-                height: '50px',
+                width: "320px",
+                height: "50px",
                 borderRadius: 8,
-                backgroundColor: '#1F5132',
+                backgroundColor: "#183D26",
               }}
               onClick={handleSubmit}
             >
               Sign in
             </Button>
-            <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={() => setOpenSnackbar(false)}>
-              <Alert onClose={() => setOpenSnackbar(false)} severity={snackbarSeverity} sx={{ width: "100%" }}>
+            <Snackbar
+              open={openSnackbar}
+              autoHideDuration={6000}
+              onClose={() => setOpenSnackbar(false)}
+            >
+              <Alert
+                onClose={() => setOpenSnackbar(false)}
+                severity={snackbarSeverity}
+                sx={{ width: "100%" }}
+              >
                 {snackbarMessage}
               </Alert>
             </Snackbar>

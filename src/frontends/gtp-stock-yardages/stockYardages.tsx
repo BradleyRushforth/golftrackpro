@@ -1,10 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { Card, CardContent, Grid2, TextField, Typography, Button, Stack, Box, IconButton, Tooltip } from "@mui/material";
-import { doc, getDoc, updateDoc, collection, getDocs } from "firebase/firestore";
+import {
+  Card,
+  CardContent,
+  Grid2,
+  TextField,
+  Typography,
+  Button,
+  Stack,
+  Box,
+  IconButton,
+  Tooltip,
+  useMediaQuery,
+} from "@mui/material";
+import {
+  doc,
+  getDoc,
+  updateDoc,
+  collection,
+  getDocs,
+} from "firebase/firestore";
 import { auth, db } from "../../shared/Auth/services/firebaseConfig";
 import { useSortClubs } from "../../shared/utils/sortClubs";
 import { getClubAbbreviation } from "./components/getClubAbbreviation";
-import SaveIcon from '@mui/icons-material/Save';
+import SaveIcon from "@mui/icons-material/Save";
 
 export interface IClub {
   clubType: string;
@@ -21,6 +39,8 @@ export interface IClub {
 export function StockYardages() {
   const user = auth.currentUser;
   const [clubs, setClubs] = useState<IClub[]>([]);
+
+  const isMobile = useMediaQuery("(max-width:600px)");
 
   useEffect(() => {
     const fetchClubs = async () => {
@@ -64,7 +84,11 @@ export function StockYardages() {
     fetchClubs();
   }, [user]);
 
-  const handleDistanceChange = (id: string, field: "carryDistance" | "totalDistance", value: string) => {
+  const handleDistanceChange = (
+    id: string,
+    field: "carryDistance" | "totalDistance",
+    value: string
+  ) => {
     const parsedValue = value === "" ? null : parseFloat(value) || 0;
 
     setClubs((prevClubs) =>
@@ -84,7 +108,7 @@ export function StockYardages() {
   };
 
   const handleSaveForClub = async (clubId: string) => {
-    const clubToSave = clubs.find(club => club.id === clubId);
+    const clubToSave = clubs.find((club) => club.id === clubId);
     if (!user || !clubToSave) return;
 
     const userRef = doc(db, "users", user.uid);
@@ -97,9 +121,15 @@ export function StockYardages() {
 
       await updateDoc(clubDocRef, {
         setConfiguration: clubData.setConfiguration.map((config: any) => {
-          const updatedConfig = clubToSave.setConfiguration?.find((c) => c.clubNumber === config.clubNumber);
+          const updatedConfig = clubToSave.setConfiguration?.find(
+            (c) => c.clubNumber === config.clubNumber
+          );
           return updatedConfig
-            ? { ...config, ...updatedConfig, lastUpdated: new Date().toISOString() }
+            ? {
+                ...config,
+                ...updatedConfig,
+                lastUpdated: new Date().toISOString(),
+              }
             : config;
         }),
       });
@@ -109,22 +139,28 @@ export function StockYardages() {
   const handleSaveAll = async () => {
     if (!user) return;
     const userRef = doc(db, "users", user.uid);
-    
+
     try {
       const clubsRef = collection(userRef, "golfClubs");
-      
+
       for (const club of clubs) {
         const clubDocRef = doc(clubsRef, club.clubType.toLowerCase());
         const clubSnapshot = await getDoc(clubDocRef);
-        
+
         if (clubSnapshot.exists()) {
           const clubData = clubSnapshot.data();
-          
+
           await updateDoc(clubDocRef, {
             setConfiguration: clubData.setConfiguration.map((config: any) => {
-              const updatedConfig = club.setConfiguration?.find((c) => c.clubNumber === config.clubNumber);
+              const updatedConfig = club.setConfiguration?.find(
+                (c) => c.clubNumber === config.clubNumber
+              );
               return updatedConfig
-                ? { ...config, ...updatedConfig, lastUpdated: new Date().toISOString() }
+                ? {
+                    ...config,
+                    ...updatedConfig,
+                    lastUpdated: new Date().toISOString(),
+                  }
                 : config;
             }),
           });
@@ -138,85 +174,107 @@ export function StockYardages() {
   const sortedClubs = useSortClubs(clubs);
 
   return (
-    <Grid2 container spacing={2} sx={{ padding: 3 }}>
-      <Grid2 container alignItems="center" justifyContent="space-between" size={12}>
-        <Typography color="#000000" variant="h3">
+    <Grid2 container spacing={2} sx={{ px: "4%", pt: "1%" }}>
+      <Grid2
+        container
+        alignItems="center"
+        justifyContent="space-between"
+        size={12}
+        sx={{
+          display: "flex",
+          flexDirection: isMobile ? "row" : "row",
+          gap: 2,
+        }}
+      >
+        <Typography color="#000000" variant="h3" sx={{ flex: 1 }}>
           Stock Yardages
         </Typography>
+
         <Button
           variant="contained"
-          sx={{ 
-            backgroundColor: "#1F5132",
-            fontSize: '15px'
+          sx={{
+            backgroundColor: "#183D26",
+            fontSize: "15px",
+            display: "flex",
+            alignItems: "center",
+            height: "40px",
           }}
           onClick={handleSaveAll}
         >
-          Save All Yardages
+          {isMobile ? (
+            <SaveIcon sx={{ fontSize: "30px" }} />
+          ) : (
+            "Save All Yardages"
+          )}
         </Button>
       </Grid2>
 
       {sortedClubs.map((club) => (
-        <Grid2 size={3} key={club.id}>
-          <Card 
-            sx={{ 
-              padding: 2, 
-              backgroundColor: "#FFFFFF", 
+        <Grid2 size={{ xs: 12, md: 3 }} key={club.id}>
+          <Card
+            sx={{
+              padding: 2,
+              backgroundColor: "#FFFFFF",
               borderRadius: 8,
-              boxShadow: '0px 0px 20px #C8E6C9',
-              height: '220px'
-            }}>
-              <Tooltip title={'Save'}>
-                <IconButton
-                  sx={{
-                    position: 'absolute'
-                  }}
-                  onClick={() => handleSaveForClub(club.id!)}>
-                  <SaveIcon />
-                </IconButton>
-              </Tooltip>
+              boxShadow:
+                "0px 4px 10px rgba(0, 0, 0, 0.25), 0px 2px 6px rgba(95, 189, 123, 0.1)",
+              height: "220px",
+            }}
+          >
+            <Tooltip title={"Save"}>
+              <IconButton
+                sx={{
+                  position: "absolute",
+                }}
+                onClick={() => handleSaveForClub(club.id!)}
+              >
+                <SaveIcon />
+              </IconButton>
+            </Tooltip>
             <CardContent>
               <Box
                 sx={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  width: '100%',
-                  height: '100%',
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: "100%",
+                  height: "100%",
                 }}
               >
                 {club.setConfiguration?.map((config: any) => (
                   <IconButton
                     sx={{
-                      backgroundColor: "#1F5132",
-                      fontFamily: 'Staatliches, Arial, sans-serif',
+                      backgroundColor: "#183D26",
+                      fontFamily: "Staatliches, Arial, sans-serif",
                       marginBottom: 2,
-                      width: '80px',
-                      height: '80px',
-                      borderRadius: '50%',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      '&:hover': {
-                        backgroundColor: '#1F5132',
+                      width: "80px",
+                      height: "80px",
+                      borderRadius: "50%",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      "&:hover": {
+                        backgroundColor: "#183D26",
                         opacity: 1,
                       },
-                      '&:active': {
-                        backgroundColor: '#1F5132',
+                      "&:active": {
+                        backgroundColor: "#183D26",
                       },
-                      '&:focus': {
-                        outline: 'none',
+                      "&:focus": {
+                        outline: "none",
                       },
                     }}
                   >
                     <Stack
                       style={{
-                        background: 'linear-gradient(0deg, #FFD700 0%, #FFC700 25%, #FFE08A 50%, #B8860B 100%)',
-                        backgroundClip: 'text',
-                        color: 'transparent',
-                        fontSize: '45px',
-                        textTransform: 'none',
-                        padding: '0',
-                        transition: 'all 0.3s ease',
+                        background:
+                          "linear-gradient(0deg, #FFD700 0%, #FFC700 25%, #FFE08A 50%, #B8860B 100%)",
+                        backgroundClip: "text",
+                        color: "transparent",
+                        fontSize: "45px",
+                        textTransform: "none",
+                        padding: "0",
+                        transition: "all 0.3s ease",
                       }}
                     >
                       {getClubAbbreviation(config.clubNumber)}
@@ -225,7 +283,7 @@ export function StockYardages() {
                 ))}
               </Box>
               {club.setConfiguration?.map((config: any, idx: any) => (
-                <Grid2 container spacing={1} key={idx}>
+                <Grid2 container spacing={1} key={idx} sx={{ mt: 2 }}>
                   <Grid2 size={6}>
                     <TextField
                       placeholder="Enter Distance"
@@ -233,11 +291,17 @@ export function StockYardages() {
                       fullWidth
                       type="number"
                       value={config.carryDistance ?? ""}
-                      onChange={(e) => handleDistanceChange(club.id!, "carryDistance", e.target.value)}
+                      onChange={(e) =>
+                        handleDistanceChange(
+                          club.id!,
+                          "carryDistance",
+                          e.target.value
+                        )
+                      }
                       sx={{
                         "& .MuiInputBase-root": {
                           borderBottom: "none",
-                          fontSize: '40px'
+                          fontSize: "40px",
                         },
                         "& .MuiInput-underline:before": {
                           borderBottom: "none",
@@ -248,12 +312,17 @@ export function StockYardages() {
                         "& .MuiInputBase-input": {
                           textAlign: "center",
                         },
-                        '& .MuiInputBase-input::placeholder': {
-                          fontSize: '20px',
-                        }
+                        "& .MuiInputBase-input::placeholder": {
+                          fontSize: "20px",
+                        },
+                        borderRight: "1px solid #ccc",
+                        marginRight: "10px",
+                        borderSpacing: "0 10px",
                       }}
                     />
-                    <Typography sx={{ textAlign: 'center', pr: 1.5 }}>Carry Distance</Typography>
+                    <Typography sx={{ textAlign: "center", pr: 1.5 }}>
+                      Carry Distance
+                    </Typography>
                   </Grid2>
                   <Grid2 size={6}>
                     <TextField
@@ -262,11 +331,17 @@ export function StockYardages() {
                       fullWidth
                       type="number"
                       value={config.totalDistance ?? ""}
-                      onChange={(e) => handleDistanceChange(club.id!, "totalDistance", e.target.value)}
+                      onChange={(e) =>
+                        handleDistanceChange(
+                          club.id!,
+                          "totalDistance",
+                          e.target.value
+                        )
+                      }
                       sx={{
                         "& .MuiInputBase-root": {
                           borderBottom: "none",
-                          fontSize: '40px'
+                          fontSize: "40px",
                         },
                         "& .MuiInput-underline:before": {
                           borderBottom: "none",
@@ -277,12 +352,14 @@ export function StockYardages() {
                         "& .MuiInputBase-input": {
                           textAlign: "center",
                         },
-                        '& .MuiInputBase-input::placeholder': {
-                          fontSize: '20px',
-                        }
+                        "& .MuiInputBase-input::placeholder": {
+                          fontSize: "20px",
+                        },
                       }}
                     />
-                    <Typography sx={{ textAlign: 'center', pr: 1.5 }}>Total Distance</Typography>
+                    <Typography sx={{ textAlign: "center", pr: 1.5 }}>
+                      Total Distance
+                    </Typography>
                   </Grid2>
                 </Grid2>
               ))}

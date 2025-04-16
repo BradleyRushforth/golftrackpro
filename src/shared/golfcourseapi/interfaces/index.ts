@@ -1,14 +1,14 @@
 export interface IHole {
-  par: number,
-  yardage: number,
-  handicap: number
+  par: number;
+  yardage: number;
+  handicap: number;
 }
 
 export interface ILocation {
-  address: string,
-  city: string,
-  country: string,
-  state: string
+  address: string;
+  city: string;
+  country: string;
+  state: string;
 }
 
 export interface ITee {
@@ -38,4 +38,5 @@ export interface IGolfCourse {
     female: ITee[];
     male: ITee[];
   };
+  holes: IHole[];
 }

@@ -1,18 +1,32 @@
-import React, { useEffect, useState } from 'react';
-import { Box, Grid2, Button, useMediaQuery, Drawer, IconButton, List, ListItemText, ListItemButton } from '@mui/material';
-import { Link } from 'react-router-dom';
-import { goldGradientStyle } from '../../shared/components/goldGradientStyle';
-import { getAuth, onAuthStateChanged, User } from '@firebase/auth';
-import { Logout } from '../../shared/Auth/components/logout';
-import { getFirestore, doc, getDoc } from '@firebase/firestore';
-import MenuIcon from '@mui/icons-material/Menu'; // Hamburger Icon
+import React, { useEffect, useState } from "react";
+import {
+  Box,
+  Grid2,
+  Button,
+  useMediaQuery,
+  Drawer,
+  IconButton,
+  List,
+  ListItemText,
+  ListItemButton,
+  Typography,
+} from "@mui/material";
+import { Link } from "react-router-dom";
+import { getAuth, onAuthStateChanged, User } from "@firebase/auth";
+import { Logout } from "../../shared/Auth/components/logout";
+import { getFirestore, doc, getDoc } from "@firebase/firestore";
+import MenuIcon from "@mui/icons-material/Menu";
+import "@fontsource-variable/montserrat";
+import OutlinedFlagIcon from "@mui/icons-material/OutlinedFlag";
 
 export const Navbar = () => {
   const [user, setUser] = useState<User | null>(null);
-  const [profilePicture, setProfilePicture] = useState<string>('public/assets/avatars/default.jpg');
+  const [profilePicture, setProfilePicture] = useState<string>(
+    "public/assets/avatars/default.jpg"
+  );
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const isMobile = useMediaQuery('(max-width: 600px)');
+  const isMobile = useMediaQuery("(max-width: 600px)");
 
   useEffect(() => {
     const auth = getAuth();
@@ -21,16 +35,23 @@ export const Navbar = () => {
 
       if (currentUser) {
         const db = getFirestore();
-        const userRef = doc(db, 'users', currentUser.uid);
-        const userDoc = await getDoc(userRef);
+        const userRef = doc(db, "users", currentUser.uid);
 
-        if (userDoc.exists()) {
-          const userData = userDoc.data();
-          setProfilePicture(userData.profilePicture || 'default.jpg');
-        } else {
-          console.log("No such document!");
-          setProfilePicture('default.jpg');
+        try {
+          const userDoc = await getDoc(userRef);
+
+          if (userDoc.exists()) {
+            const userData = userDoc.data();
+            setProfilePicture(userData.profilePicture || "default.jpg");
+          } else {
+            console.log("No such document!");
+            setProfilePicture("default.jpg");
+          }
+        } catch (error) {
+          console.error("Error fetching user document:", error);
         }
+      } else {
+        setProfilePicture("public/assets/avatars/default.jpg");
       }
     });
 
@@ -42,62 +63,132 @@ export const Navbar = () => {
   };
 
   const menuItems = [
-    { label: 'Stock Yardages', to: '/stockyardages' },
-    { label: 'Handicap', to: '/handicap' },
-    { label: 'Academy', to: '/academy' },
+    { label: "Stock Yardages", to: "/stockyardages" },
+    { label: "Handicap", to: "/handicap" },
+    { label: "Academy", to: "/academy" },
   ];
+
+  const font = {
+    fontFamily: "Montserrat, sans-serif",
+    fontWeight: 400,
+    fontSize: "30px",
+    color: "#FFFFFF",
+    letterSpacing: "2px",
+  };
 
   return (
     <>
       <Grid2
         container
         sx={{
-          backgroundColor: '#1F5132',
-          padding: '0 16px',
+          backgroundColor: "rgba(0, 0, 0, 0.76)",
+          padding: "0 16px",
           margin: 0,
-          width: '100%',
-          position: 'absolute',
+          width: "100%",
+          height: "80px",
+          position: "absolute",
           top: 0,
           left: 0,
           right: 0,
-          alignItems: 'center',
+          alignItems: "center",
+          px: isMobile ? "2" : "4%",
         }}
       >
-        <Grid2 size={2} display="flex" justifyContent="flex-start" alignItems="center">
-          <Button component={Link} to="/" sx={goldGradientStyle}>
-            <Box component="img" src={`${process.env.PUBLIC_URL}/assets/logo-gold.png`}
+        <Grid2
+          size={isMobile ? 10 : 2}
+          display="flex"
+          justifyContent="flex-start"
+          alignItems="center"
+        >
+          <Button
+            component={Link}
+            to="/"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              textTransform: "none",
+            }}
+          >
+            <OutlinedFlagIcon
               sx={{
-                width: '40px',
-                height: 'auto',
-              }} />
+                fontSize: "40px",
+                color: "#FFFFFF",
+                mr: 1,
+                display: "inline-block",
+                verticalAlign: "center",
+              }}
+            />
+            <Typography
+              sx={{
+                fontSize: "35px",
+                color: "#FFFFFF",
+                letterSpacing: "2px",
+                lineHeight: 1,
+                p: 0,
+              }}
+            >
+              Golf Track Pro
+            </Typography>
           </Button>
         </Grid2>
 
         {isMobile ? (
-          <Grid2 size={10} display="flex" justifyContent="flex-end" alignItems="center">
-            <IconButton onClick={() => setMobileMenuOpen(true)} sx={goldGradientStyle}>
-              <MenuIcon sx={{ fontSize: '35px', color: '#FFC702' }}/>
+          <Grid2
+            size={2}
+            display="flex"
+            justifyContent="flex-end"
+            alignItems="center"
+          >
+            <IconButton onClick={() => setMobileMenuOpen(true)}>
+              <MenuIcon sx={{ fontSize: "35px", color: "#FFFFFF" }} />
             </IconButton>
           </Grid2>
         ) : (
-          <Grid2 size={10} display="flex" justifyContent="flex-end" columnGap={4} alignItems="center">
+          <Grid2
+            size={10}
+            display="flex"
+            justifyContent="flex-end"
+            alignItems="center"
+          >
             {menuItems.map((item) => (
-              <Button key={item.to} component={Link} to={item.to} sx={{ ...goldGradientStyle, fontSize: '30px' }}>
+              <Button
+                key={item.to}
+                component={Link}
+                to={item.to}
+                sx={{
+                  ...font,
+                  mx: 3,
+                }}
+              >
                 {item.label}
               </Button>
             ))}
 
             {user ? (
               <>
-                <Box component={Link} to="/profile" sx={{ display: 'flex', alignItems: 'center' }}>
-                  <Box component="img" src={profilePicture} sx={{ width: '40px', height: '40px', borderRadius: '50%' }} />
+                <Box
+                  component={Link}
+                  to="/profile"
+                  sx={{ display: "flex", alignItems: "center" }}
+                >
+                  <Box
+                    component="img"
+                    src={profilePicture}
+                    sx={{
+                      width: "40px",
+                      height: "40px",
+                      borderRadius: "50%",
+                      mx: 3,
+                    }}
+                  />
                 </Box>
                 <Logout />
               </>
             ) : (
               <>
-                <Button component={Link} to="/register" sx={{ ...goldGradientStyle, fontSize: '30px' }}>Register</Button>
-                <Button component={Link} to="/login" sx={{ ...goldGradientStyle, fontSize: '30px' }}>Login</Button>
+                <Button component={Link} to="/login" sx={{ ...font }}>
+                  Login
+                </Button>
               </>
             )}
           </Grid2>
@@ -109,19 +200,28 @@ export const Navbar = () => {
         open={mobileMenuOpen}
         onClose={handleCloseMobileMenu}
         sx={{
-          width: '250px',
+          width: "250px",
         }}
       >
-        <Box sx={{ width: 250, padding: '16px' }}>
+        <Box sx={{ width: 250, padding: "16px" }}>
           <List>
             {menuItems.map((item) => (
-              <ListItemButton key={item.to} component={Link} to={item.to} onClick={handleCloseMobileMenu}>
+              <ListItemButton
+                key={item.to}
+                component={Link}
+                to={item.to}
+                onClick={handleCloseMobileMenu}
+              >
                 <ListItemText primary={item.label} />
               </ListItemButton>
             ))}
             {user ? (
               <>
-                <ListItemButton component={Link} to="/profile" onClick={handleCloseMobileMenu}>
+                <ListItemButton
+                  component={Link}
+                  to="/profile"
+                  onClick={handleCloseMobileMenu}
+                >
                   <ListItemText primary="Profile" />
                 </ListItemButton>
                 <ListItemButton onClick={handleCloseMobileMenu}>
@@ -130,10 +230,11 @@ export const Navbar = () => {
               </>
             ) : (
               <>
-                <ListItemButton component={Link} to="/register" onClick={handleCloseMobileMenu}>
-                  <ListItemText primary="Register" />
-                </ListItemButton>
-                <ListItemButton component={Link} to="/login" onClick={handleCloseMobileMenu}>
+                <ListItemButton
+                  component={Link}
+                  to="/login"
+                  onClick={handleCloseMobileMenu}
+                >
                   <ListItemText primary="Login" />
                 </ListItemButton>
               </>

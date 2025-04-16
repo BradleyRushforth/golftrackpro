@@ -1,7 +1,15 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
 import { auth } from "./firebaseConfig";
 
-export const registerUser = async (email: string, password: string, username: string): Promise<void> => {
+export const registerUser = async (
+  email: string,
+  password: string,
+  username: string
+): Promise<void> => {
   try {
     await createUserWithEmailAndPassword(auth, email, password);
     console.log("User registered successfully");
@@ -10,12 +18,15 @@ export const registerUser = async (email: string, password: string, username: st
   }
 };
 
-export const loginUser = async (email: string, password: string): Promise<void> => {
+export const loginUser = async (
+  email: string,
+  password: string
+): Promise<void> => {
   try {
     await signInWithEmailAndPassword(auth, email, password);
   } catch (error: any) {
     let errorMessage = "Something went wrong. Please try again.";
-    
+
     if (error.code === "auth/user-not-found") {
       errorMessage = "No account found with this email.";
     } else if (error.code === "auth/invalid-credential") {
@@ -34,7 +45,9 @@ export const loginUser = async (email: string, password: string): Promise<void> 
 export const logoutUser = async (): Promise<void> => {
   try {
     await signOut(auth);
+
+    console.log("User logged out successfully");
   } catch (error: any) {
     throw new Error(error.message);
   }
-}
+};

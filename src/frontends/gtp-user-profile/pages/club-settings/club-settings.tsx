@@ -6,8 +6,6 @@ import {
   DialogActions,
   Typography,
   Grid2,
-  Checkbox,
-  FormControlLabel,
   Stack,
 } from "@mui/material";
 import ClubForm from "./components/clubForm";

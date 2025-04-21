@@ -3,20 +3,16 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import routes from "./routes/routes";
 import { Navbar } from "./frontends/gtp-navbar/navbar";
 import "@fontsource/staatliches";
-import { Box, createTheme, ThemeProvider } from "@mui/material";
+import { Box, ThemeProvider } from "@mui/material";
 import Backdrop from "./shared/backdrop/backdrop";
 import { UserProvider } from "./context/userContext";
+import theme from "./theme/breakpoints";
 
-const theme = createTheme({
-  typography: {
-    fontFamily: "Staatliches, Arial, sans-serif",
-  },
-});
 
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
-      <Backdrop color="#DCDCDC" />
+      <Backdrop color="#182525" />
       <UserProvider>
         <Router>
           <Navbar />

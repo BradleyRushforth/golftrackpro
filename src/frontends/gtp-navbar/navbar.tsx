@@ -10,6 +10,7 @@ import {
   ListItemText,
   ListItemButton,
   Typography,
+  useTheme,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { getAuth, onAuthStateChanged, User } from "@firebase/auth";
@@ -26,7 +27,8 @@ export const Navbar = () => {
   );
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const isMobile = useMediaQuery("(max-width: 600px)");
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("mLg"));
 
   useEffect(() => {
     const auth = getAuth();
@@ -64,14 +66,14 @@ export const Navbar = () => {
 
   const menuItems = [
     { label: "Stock Yardages", to: "/stockyardages" },
-    { label: "Handicap", to: "/handicap" },
+    { label: "Courses", to: "/courses" },
     { label: "Academy", to: "/academy" },
   ];
 
   const font = {
     fontFamily: "Montserrat, sans-serif",
     fontWeight: 400,
-    fontSize: "30px",
+    fontSize: "20px",
     color: "#FFFFFF",
     letterSpacing: "2px",
   };
@@ -91,11 +93,11 @@ export const Navbar = () => {
           left: 0,
           right: 0,
           alignItems: "center",
-          px: isMobile ? "2" : "4%",
+          px: "4%",
         }}
       >
         <Grid2
-          size={isMobile ? 10 : 2}
+          size={isMobile ? 10 : 3}
           display="flex"
           justifyContent="flex-start"
           alignItems="center"
@@ -118,17 +120,17 @@ export const Navbar = () => {
                 verticalAlign: "center",
               }}
             />
-            <Typography
-              sx={{
-                fontSize: "35px",
-                color: "#FFFFFF",
-                letterSpacing: "2px",
-                lineHeight: 1,
-                p: 0,
-              }}
-            >
-              Golf Track Pro
-            </Typography>
+              <Typography
+                sx={{
+                  fontSize: "35px",
+                  color: "#FFFFFF",
+                  letterSpacing: "2px",
+                  lineHeight: 1,
+                  p: 0,
+                }}
+              >
+                Golf Track Pro
+              </Typography>
           </Button>
         </Grid2>
 
@@ -145,7 +147,7 @@ export const Navbar = () => {
           </Grid2>
         ) : (
           <Grid2
-            size={10}
+            size={9}
             display="flex"
             justifyContent="flex-end"
             alignItems="center"

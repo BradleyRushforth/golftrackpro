@@ -5,7 +5,6 @@ import {
   Grid2,
   TextField,
   Typography,
-  Button,
   Stack,
   Box,
   IconButton,
@@ -186,27 +185,40 @@ export function StockYardages() {
           gap: 2,
         }}
       >
-        <Typography color="#000000" variant="h3" sx={{ flex: 1 }}>
+        <Typography
+          variant="h4"
+          sx={{
+            flex: 1,
+            color: "#FFFFFF",
+            fontFamily: '"Inter Variable", sans-serif',
+            fontWeight: 500,
+            letterSpacing: "0px",
+            lineHeight: 1.1,
+            textTransform: "uppercase",
+          }}
+        >
           Stock Yardages
         </Typography>
 
-        <Button
-          variant="contained"
+        <IconButton
           sx={{
-            backgroundColor: "#183D26",
-            fontSize: "15px",
+            backgroundColor: "#243536",
+            borderRadius: "15px",
             display: "flex",
             alignItems: "center",
-            height: "40px",
+            height: "50px",
+            width: "50px",
+            transition: "all 0.2s ease-in-out",
+            "&:hover": {
+              backgroundColor: "#2f4849",
+              boxShadow: "0 0 10px rgba(36, 53, 54, 0.6)",
+              transform: "translateY(-2px)",
+            },
           }}
           onClick={handleSaveAll}
         >
-          {isMobile ? (
-            <SaveIcon sx={{ fontSize: "30px" }} />
-          ) : (
-            "Save All Yardages"
-          )}
-        </Button>
+          <SaveIcon sx={{ fontSize: "30px", color: "#FFFFFF" }} />
+        </IconButton>
       </Grid2>
 
       {sortedClubs.map((club) => (
@@ -214,10 +226,9 @@ export function StockYardages() {
           <Card
             sx={{
               padding: 2,
-              backgroundColor: "#FFFFFF",
+              backgroundColor: "#132122",
               borderRadius: 8,
-              boxShadow:
-                "0px 4px 10px rgba(0, 0, 0, 0.25), 0px 2px 6px rgba(95, 189, 123, 0.1)",
+              border: "0.5px solid #2a3a3b",
               height: "220px",
             }}
           >
@@ -228,7 +239,7 @@ export function StockYardages() {
                 }}
                 onClick={() => handleSaveForClub(club.id!)}
               >
-                <SaveIcon />
+                <SaveIcon sx={{ color: "#FFFFFF" }} />
               </IconButton>
             </Tooltip>
             <CardContent>
@@ -244,25 +255,13 @@ export function StockYardages() {
                 {club.setConfiguration?.map((config: any) => (
                   <IconButton
                     sx={{
-                      backgroundColor: "#183D26",
+                      backgroundColor: "#192729",
                       fontFamily: "Staatliches, Arial, sans-serif",
                       marginBottom: 2,
                       width: "80px",
                       height: "80px",
                       borderRadius: "50%",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      "&:hover": {
-                        backgroundColor: "#183D26",
-                        opacity: 1,
-                      },
-                      "&:active": {
-                        backgroundColor: "#183D26",
-                      },
-                      "&:focus": {
-                        outline: "none",
-                      },
+                      border: "2px solid #2a3c3c",
                     }}
                   >
                     <Stack
@@ -283,7 +282,7 @@ export function StockYardages() {
                 ))}
               </Box>
               {club.setConfiguration?.map((config: any, idx: any) => (
-                <Grid2 container spacing={1} key={idx} sx={{ mt: 2 }}>
+                <Grid2 container key={idx} sx={{ mt: 2 }}>
                   <Grid2 size={6}>
                     <TextField
                       placeholder="Enter Distance"
@@ -302,6 +301,7 @@ export function StockYardages() {
                         "& .MuiInputBase-root": {
                           borderBottom: "none",
                           fontSize: "40px",
+                          color: "#FFFFFF",
                         },
                         "& .MuiInput-underline:before": {
                           borderBottom: "none",
@@ -315,12 +315,18 @@ export function StockYardages() {
                         "& .MuiInputBase-input::placeholder": {
                           fontSize: "20px",
                         },
-                        borderRight: "1px solid #ccc",
+                        borderRight: "1px solid #2a3c3c",
                         marginRight: "10px",
                         borderSpacing: "0 10px",
                       }}
                     />
-                    <Typography sx={{ textAlign: "center", pr: 1.5 }}>
+                    <Typography
+                      sx={{
+                        textAlign: "center",
+                        pr: 1.5,
+                        color: "#778486",
+                      }}
+                    >
                       Carry Distance
                     </Typography>
                   </Grid2>
@@ -342,6 +348,7 @@ export function StockYardages() {
                         "& .MuiInputBase-root": {
                           borderBottom: "none",
                           fontSize: "40px",
+                          color: "#FFFFFF",
                         },
                         "& .MuiInput-underline:before": {
                           borderBottom: "none",
@@ -357,7 +364,13 @@ export function StockYardages() {
                         },
                       }}
                     />
-                    <Typography sx={{ textAlign: "center", pr: 1.5 }}>
+                    <Typography
+                      sx={{
+                        textAlign: "center",
+                        pr: 1.5,
+                        color: "#778486",
+                      }}
+                    >
                       Total Distance
                     </Typography>
                   </Grid2>

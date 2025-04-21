@@ -1,12 +1,8 @@
-import React from 'react'
-import { Typography } from '@mui/material'
+import React from "react";
+import { GolfCourses } from "./golfCourses";
 
 const Academy = () => {
-  return (
-    <>
-    <Typography>Academy</Typography>
-    </>
-  )
-}
+  return <GolfCourses />;
+};
 
-export default Academy
+export default Academy;

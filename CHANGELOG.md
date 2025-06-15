@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.13](https://github.com/BradleyRushforth/golftrackpro/compare/v0.1.12...v0.1.13) (2025-06-15)
+
+
+### Bug Fixes
+
+* fixed adding club dialog in settings + Icon change ([8e55cea](https://github.com/BradleyRushforth/golftrackpro/commit/8e55ceaf471391d1c0039f85843a38a35c95963e))
+
 ### [0.1.12](https://github.com/BradleyRushforth/golftrackpro/compare/v0.1.11...v0.1.12) (2025-06-15)
 
 

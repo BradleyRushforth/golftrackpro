@@ -15,6 +15,7 @@ import { getAuth, onAuthStateChanged } from "@firebase/auth";
 import { query, collection, getDocs } from "@firebase/firestore";
 import { db } from "../../shared/Auth/services/firebaseConfig";
 import "@fontsource-variable/inter";
+import CustomTooltip from "../../shared/utils/customTooltip";
 
 const Courses = () => {
   const [openDialog, setOpenDialog] = useState(false);
@@ -97,25 +98,27 @@ const Courses = () => {
           Courses
         </Typography>
 
-        <IconButton
-          sx={{
-            backgroundColor: "#243536",
-            borderRadius: "15px",
-            display: "flex",
-            alignItems: "center",
-            height: "50px",
-            width: "50px",
-            transition: "all 0.2s ease-in-out",
-            "&:hover": {
-              backgroundColor: "#2f4849",
-              boxShadow: "0 0 10px rgba(36, 53, 54, 0.6)",
-              transform: "translateY(-2px)",
-            },
-          }}
-          onClick={handleOpen}
-        >
-          <AddIcon sx={{ fontSize: "35px", color: "#FFFFFF" }} />
-        </IconButton>
+        <CustomTooltip title="Add New Course">
+          <IconButton
+            sx={{
+              backgroundColor: "#243536",
+              borderRadius: "15px",
+              display: "flex",
+              alignItems: "center",
+              height: "50px",
+              width: "50px",
+              transition: "all 0.2s ease-in-out",
+              "&:hover": {
+                backgroundColor: "#2f4849",
+                boxShadow: "0 0 10px rgba(36, 53, 54, 0.6)",
+                transform: "translateY(-2px)",
+              },
+            }}
+            onClick={handleOpen}
+          >
+            <AddIcon sx={{ fontSize: "35px", color: "#FFFFFF" }} />
+          </IconButton>
+        </CustomTooltip>
 
         <AddNewCourseDialog
           open={openDialog}
@@ -138,17 +141,24 @@ const Courses = () => {
             label: "Greens in Reg",
             value: course?.greensInReg ?? "N/A",
           },
+          {
+            label: "Putts Made",
+            value: course?.puttsMade ?? "N/A",
+          },
         ];
 
         return (
-          <Grid2 size={{ xs: 12, md: 6, mLg: 4, xl: 3 }} key={course.id}>
+          <Grid2
+            size={{ xs: 12, md: 6, mLg: 4, xl: 3, xxxl: 2 }}
+            key={course.id}
+          >
             <Card
               sx={{
                 padding: 2,
                 backgroundColor: "#132122",
                 borderRadius: 8,
                 border: "0.5px solid #2a3a3b",
-                height: "380px",
+                height: "420px",
               }}
             >
               <CardContent>
@@ -181,7 +191,7 @@ const Courses = () => {
                         justifyContent="center"
                         sx={{
                           backgroundColor: "#192729",
-                          border: "2px solid #2a3c3c",
+                          border: "2px solid #4CAF50",
                           borderRadius: "50%",
                         }}
                         mb={1}

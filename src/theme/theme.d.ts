@@ -9,5 +9,6 @@ declare module "@mui/material/styles" {
     mLg: true;
     xl: true;
     xxl: true;
+    xxxl: true;
   }
 }

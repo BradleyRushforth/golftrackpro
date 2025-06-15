@@ -1,12 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  TextField,
-  Button,
-  Grid2,
-  Typography,
-  InputAdornment,
-  IconButton,
-} from "@mui/material";
+import { TextField, Button, Grid2, Typography, Box } from "@mui/material";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { auth, db } from "../../../../shared/Auth/services/firebaseConfig";
 import DateOfBirthField from "../../utils/dateOfBirthField";
@@ -105,8 +98,6 @@ const ProfileSettings = () => {
         address: form.address || userDoc.data().address,
         postcode: form.postcode || userDoc.data().postcode,
       });
-
-      alert("Profile settings updated successfully!");
     } catch (error) {
       console.error("Error updating Profile Settings:", error);
       alert("Failed to update profile settings. Please try again.");
@@ -119,6 +110,7 @@ const ProfileSettings = () => {
 
   const font = {
     fontFamily: "'Spline Sans', sans-serif",
+    color: "#183D26",
   };
 
   const textFieldFontStyles = {
@@ -135,22 +127,26 @@ const ProfileSettings = () => {
       container
       spacing={2}
       sx={{
-        maxWidth: 900,
-        margin: "auto",
         mt: 6,
         display: "grid",
+        ml: "18%",
         gridTemplateColumns: "1fr 1fr 1fr",
         gap: 6,
+        backgroundColor: "#F5F5F5",
+        borderRadius: 5,
+        width: "80%",
+        p: 5,
+        pb: 8,
       }}
     >
       <Grid2 container direction="column" spacing={5}>
         <Grid2>
-          <Typography variant="h3" pl={1} mb={2}>
+          <Typography variant="h2" pl={1} mb={2} color={"#183D26"}>
             Profile
           </Typography>
           <Typography
             variant="body1"
-            sx={{ ...font, color: "#183D26", marginBottom: "8px", pl: 1 }}
+            sx={{ ...font, marginBottom: "8px", pl: 1 }}
           >
             First Name
           </Typography>
@@ -170,7 +166,7 @@ const ProfileSettings = () => {
         <Grid2>
           <Typography
             variant="body1"
-            sx={{ ...font, color: "#183D26", marginBottom: "8px", pl: 1 }}
+            sx={{ ...font, marginBottom: "8px", pl: 1 }}
           >
             Last Name
           </Typography>
@@ -190,7 +186,7 @@ const ProfileSettings = () => {
         <Grid2>
           <Typography
             variant="body1"
-            sx={{ ...font, color: "#183D26", marginBottom: "8px", pl: 1 }}
+            sx={{ ...font, marginBottom: "8px", pl: 1 }}
           >
             Username
           </Typography>
@@ -210,7 +206,7 @@ const ProfileSettings = () => {
         <Grid2>
           <Typography
             variant="body1"
-            sx={{ ...font, color: "#183D26", marginBottom: "8px", pl: 1 }}
+            sx={{ ...font, marginBottom: "8px", pl: 1 }}
           >
             Email
           </Typography>
@@ -228,11 +224,11 @@ const ProfileSettings = () => {
         </Grid2>
       </Grid2>
 
-      <Grid2 container direction="column" spacing={5} mt={"72px"}>
+      <Grid2 container direction="column" spacing={5} mt={"88px"}>
         <Grid2>
           <Typography
             variant="body1"
-            sx={{ ...font, color: "#183D26", marginBottom: "8px", pl: 1 }}
+            sx={{ ...font, marginBottom: "8px", pl: 1 }}
           >
             Mobile Number
           </Typography>
@@ -251,7 +247,7 @@ const ProfileSettings = () => {
         <Grid2>
           <Typography
             variant="body1"
-            sx={{ ...font, color: "#183D26", marginBottom: "8px", pl: 1 }}
+            sx={{ ...font, marginBottom: "8px", pl: 1 }}
           >
             Home Telephone
           </Typography>
@@ -270,7 +266,7 @@ const ProfileSettings = () => {
         <Grid2>
           <Typography
             variant="body1"
-            sx={{ ...font, color: "#183D26", marginBottom: "8px", pl: 1 }}
+            sx={{ ...font, marginBottom: "8px", pl: 1 }}
           >
             Job Title
           </Typography>
@@ -295,11 +291,11 @@ const ProfileSettings = () => {
           />
         </Grid2>
       </Grid2>
-      <Grid2 container direction="column" spacing={5} mt={"72px"}>
+      <Grid2 container direction="column" spacing={5} mt={"88px"}>
         <Grid2>
           <Typography
             variant="body1"
-            sx={{ ...font, color: "#183D26", marginBottom: "8px", pl: 1 }}
+            sx={{ ...font, marginBottom: "8px", pl: 1 }}
           >
             Country
           </Typography>
@@ -318,7 +314,7 @@ const ProfileSettings = () => {
         <Grid2>
           <Typography
             variant="body1"
-            sx={{ ...font, color: "#183D26", marginBottom: "8px", pl: 1 }}
+            sx={{ ...font, marginBottom: "8px", pl: 1 }}
           >
             Address
           </Typography>
@@ -338,7 +334,7 @@ const ProfileSettings = () => {
         <Grid2>
           <Typography
             variant="body1"
-            sx={{ ...font, color: "#183D26", marginBottom: "8px", pl: 1 }}
+            sx={{ ...font, marginBottom: "8px", pl: 1 }}
           >
             Postcode
           </Typography>
@@ -368,6 +364,7 @@ const ProfileSettings = () => {
             fullWidth
             sx={{
               ...font,
+              color: "#FFFFFF",
               backgroundColor: "#183D26",
               height: "55px",
             }}

@@ -154,18 +154,34 @@ const ClubSettings: React.FC = () => {
   };
 
   return (
-    <Grid2 container spacing={2} sx={{ maxWidth: 900, margin: "auto", mt: 6 }}>
+    <Grid2
+      container
+      spacing={2}
+      sx={{
+        margin: "auto",
+        mt: 6,
+        ml: "18%",
+        backgroundColor: "#F5F5F5",
+        p: 5,
+        borderRadius: 5,
+        width: "80%",
+      }}
+    >
       <Grid2 size={10}>
         <Typography variant="h3" pl={1} mb={2}>
           Customize Your Clubs
         </Typography>
       </Grid2>
-      <Grid2 size={2}>
+      <Grid2 size={2} sx={{ display: "flex", justifyContent: "flex-end" }}>
         <Button
           variant="contained"
           color="primary"
           onClick={() => setOpenDialog(true)}
-          sx={{ backgroundColor: "#183D26", height: "50px", fontSize: "20px" }}
+          sx={{
+            backgroundColor: "#183D26",
+            height: "50px",
+            fontSize: "20px",
+          }}
           startIcon={<AddIcon />}
         >
           Add Club

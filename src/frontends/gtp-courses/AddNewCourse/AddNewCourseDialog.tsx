@@ -9,6 +9,8 @@ import {
   MenuItem,
   Snackbar,
   Alert,
+  Grid2,
+  Typography,
 } from "@mui/material";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../../shared/Auth/services/firebaseConfig";
@@ -27,7 +29,7 @@ export const AddNewCourseDialog: React.FC<IGolfCourseDialogProps> = ({
   onClose,
   onAddedCourse,
 }) => {
-  const [formData, setFormData] = useState({
+  const initialFormData = {
     name: "",
     tee: "",
     totalYards: "",
@@ -37,7 +39,10 @@ export const AddNewCourseDialog: React.FC<IGolfCourseDialogProps> = ({
     parsMade: "",
     fairwaysHit: "",
     greensInReg: "",
-  });
+    puttsMade: "",
+  };
+
+  const [formData, setFormData] = useState(initialFormData);
 
   const [snackbar, setSnackbar] = useState({
     open: false,
@@ -68,6 +73,7 @@ export const AddNewCourseDialog: React.FC<IGolfCourseDialogProps> = ({
         parsMade: Number(formData.parsMade),
         fairwaysHit: Number(formData.fairwaysHit),
         greensInReg: Number(formData.greensInReg),
+        puttsMade: Number(formData.puttsMade),
         createdAt: new Date(),
       });
 
@@ -89,6 +95,7 @@ export const AddNewCourseDialog: React.FC<IGolfCourseDialogProps> = ({
         parsMade: "",
         fairwaysHit: "",
         greensInReg: "",
+        puttsMade: "",
       });
     } catch (err) {
       console.error("Error adding golf course:", err);
@@ -100,89 +107,190 @@ export const AddNewCourseDialog: React.FC<IGolfCourseDialogProps> = ({
     }
   };
 
+  const fontStyling = {
+    fontFamily: "Staatliches, Arial, sans-serif",
+    marginBottom: "8px",
+  };
+
+  const textFieldStyling = {
+    "& .MuiInputBase-input": {
+      fontFamily: '"Inter Variable", sans-serif',
+    },
+    "& .MuiInputLabel-root": {
+      fontFamily: '"Inter Variable", sans-serif',
+    },
+  };
+
   return (
     <>
-      <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
+      <Dialog open={open} onClose={onClose} maxWidth="lg" fullWidth>
         <DialogTitle>Add Golf Course</DialogTitle>
         <DialogContent
           sx={{ display: "flex", flexDirection: "column", gap: 2, mt: 1 }}
         >
-          <TextField
-            label="Golf Course Name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            fullWidth
-          />
-          <TextField
-            select
-            label="Tee"
-            name="tee"
-            value={formData.tee}
-            onChange={handleChange}
-            fullWidth
-          >
-            {tees.map((tee) => (
-              <MenuItem key={tee} value={tee}>
-                {tee}
-              </MenuItem>
-            ))}
-          </TextField>
-          <TextField
-            label="Total Yards"
-            name="totalYards"
-            type="number"
-            value={formData.totalYards}
-            onChange={handleChange}
-          />
-          <TextField
-            label="Slope Rating"
-            name="slopeRating"
-            type="number"
-            value={formData.slopeRating}
-            onChange={handleChange}
-          />
-          <TextField
-            label="Handicap"
-            name="handicap"
-            type="number"
-            value={formData.handicap}
-            onChange={handleChange}
-          />
-          <TextField
-            label="Total"
-            name="total"
-            type="number"
-            value={formData.total}
-            onChange={handleChange}
-          />
-          <TextField
-            label="Pars Made"
-            name="parsMade"
-            type="number"
-            value={formData.parsMade}
-            onChange={handleChange}
-          />
-          <TextField
-            label="Fairways Hit"
-            name="fairwaysHit"
-            type="number"
-            value={formData.fairwaysHit}
-            onChange={handleChange}
-          />
-          <TextField
-            label="Greens in Regulation"
-            name="greensInReg"
-            type="number"
-            value={formData.greensInReg}
-            onChange={handleChange}
-          />
+          <Grid2 container spacing={2} mt={2}>
+            <Grid2 size={8}>
+              <Typography ml={1} variant="body1" sx={{ ...fontStyling }}>
+                Golf Course Name
+              </Typography>
+              <TextField
+                placeholder="e.g. TPC Sawgrass"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                fullWidth
+                sx={{ ...textFieldStyling }}
+              />
+            </Grid2>
+            <Grid2 size={4}>
+              <Typography ml={1} variant="body1" sx={{ ...fontStyling }}>
+                Select Marker
+              </Typography>
+              <TextField
+                select
+                label="Select Tee"
+                name="tee"
+                value={formData.tee}
+                onChange={handleChange}
+                fullWidth
+                sx={{ ...textFieldStyling }}
+              >
+                {tees.map((tee) => (
+                  <MenuItem key={tee} value={tee}>
+                    {tee}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </Grid2>
+            <Grid2 size={4}>
+              <Typography ml={1} variant="body1" sx={{ ...fontStyling }}>
+                Total Yards
+              </Typography>
+              <TextField
+                placeholder="e.g. 7352"
+                name="totalYards"
+                type="number"
+                value={formData.totalYards}
+                onChange={handleChange}
+                fullWidth
+                sx={{ ...textFieldStyling }}
+              />
+            </Grid2>
+            <Grid2 size={4}>
+              <Typography ml={1} variant="body1" sx={{ ...fontStyling }}>
+                Slope Rating
+              </Typography>
+              <TextField
+                placeholder="e.g. 155"
+                name="slopeRating"
+                type="number"
+                value={formData.slopeRating}
+                onChange={handleChange}
+                fullWidth
+                sx={{ ...textFieldStyling }}
+              />
+            </Grid2>
+            <Grid2 size={4}>
+              <Typography ml={1} variant="body1" sx={{ ...fontStyling }}>
+                Playing Handicap
+              </Typography>
+              <TextField
+                placeholder="e.g. 3.2"
+                name="handicap"
+                type="number"
+                value={formData.handicap}
+                onChange={handleChange}
+                fullWidth
+                sx={{ ...textFieldStyling }}
+              />
+            </Grid2>
+            <Grid2 size={4}>
+              <Typography ml={1} variant="body1" sx={{ ...fontStyling }}>
+                Total Score
+              </Typography>
+              <TextField
+                placeholder="e.g. 78"
+                name="total"
+                type="number"
+                value={formData.total}
+                onChange={handleChange}
+                fullWidth
+                sx={{ ...textFieldStyling }}
+              />
+            </Grid2>
+            <Grid2 size={4}>
+              <Typography ml={1} variant="body1" sx={{ ...fontStyling }}>
+                Pars Made
+              </Typography>
+              <TextField
+                placeholder="e.g. 12"
+                name="parsMade"
+                type="number"
+                value={formData.parsMade}
+                onChange={handleChange}
+                fullWidth
+                sx={{ ...textFieldStyling }}
+              />
+            </Grid2>
+            <Grid2 size={4}>
+              <Typography ml={1} variant="body1" sx={{ ...fontStyling }}>
+                FIR
+              </Typography>
+              <TextField
+                placeholder="e.g. 65%"
+                name="fairwaysHit"
+                type="number"
+                value={formData.fairwaysHit}
+                onChange={handleChange}
+                fullWidth
+                sx={{ ...textFieldStyling }}
+              />
+            </Grid2>
+            <Grid2 size={4}>
+              <Typography ml={1} variant="body1" sx={{ ...fontStyling }}>
+                GIR
+              </Typography>
+              <TextField
+                placeholder="e.g. 72%"
+                name="greensInReg"
+                type="number"
+                value={formData.greensInReg}
+                onChange={handleChange}
+                fullWidth
+                sx={{ ...textFieldStyling }}
+              />
+            </Grid2>
+            <Grid2 size={4}>
+              <Typography ml={1} variant="body1" sx={{ ...fontStyling }}>
+                Putts Made
+              </Typography>
+              <TextField
+                placeholder="e.g. 21"
+                name="puttsMade"
+                type="number"
+                value={formData.puttsMade}
+                onChange={handleChange}
+                fullWidth
+                sx={{ ...textFieldStyling }}
+              />
+            </Grid2>
+          </Grid2>
         </DialogContent>
         <DialogActions>
-          <Button onClick={onClose} color="inherit">
+          <Button
+            onClick={() => {
+              setFormData(initialFormData);
+              onClose();
+            }}
+            color="inherit"
+          >
             Cancel
           </Button>
-          <Button onClick={handleSubmit} variant="contained">
+          <Button
+            onClick={handleSubmit}
+            variant="contained"
+            sx={{ backgroundColor: "#183D26" }}
+          >
             Save
           </Button>
         </DialogActions>

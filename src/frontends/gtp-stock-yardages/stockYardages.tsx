@@ -222,14 +222,15 @@ export function StockYardages() {
       </Grid2>
 
       {sortedClubs.map((club) => (
-        <Grid2 size={{ xs: 12, md: 3 }} key={club.id}>
+        <Grid2 size={{ xs: 12, md: 6, lg: 3, xxxl: 2 }} key={club.id}>
           <Card
             sx={{
               padding: 2,
               backgroundColor: "#132122",
               borderRadius: 8,
               border: "0.5px solid #2a3a3b",
-              height: "220px",
+              height: "360px",
+              width: "90%",
             }}
           >
             <Tooltip title={"Save"}>
@@ -253,37 +254,36 @@ export function StockYardages() {
                 }}
               >
                 {club.setConfiguration?.map((config: any) => (
-                  <IconButton
+                  <Box
+                    alignItems="center"
+                    justifyContent="center"
+                    display={"flex"}
                     sx={{
                       backgroundColor: "#192729",
                       fontFamily: "Staatliches, Arial, sans-serif",
-                      marginBottom: 2,
+                      marginBottom: 1,
                       width: "80px",
                       height: "80px",
                       borderRadius: "50%",
-                      border: "2px solid #2a3c3c",
+                      border: "2px solid #4CAF50",
                     }}
                   >
-                    <Stack
-                      style={{
-                        background:
-                          "linear-gradient(0deg, #FFD700 0%, #FFC700 25%, #FFE08A 50%, #B8860B 100%)",
-                        backgroundClip: "text",
-                        color: "transparent",
-                        fontSize: "45px",
-                        textTransform: "none",
-                        padding: "0",
-                        transition: "all 0.3s ease",
+                    <Typography
+                      variant="h4"
+                      sx={{
+                        fontFamily: '"Inter Variable", sans-serif',
+                        fontWeight: 550,
+                        color: "#FFFFFF",
                       }}
                     >
                       {getClubAbbreviation(config.clubNumber)}
-                    </Stack>
-                  </IconButton>
+                    </Typography>
+                  </Box>
                 ))}
               </Box>
               {club.setConfiguration?.map((config: any, idx: any) => (
-                <Grid2 container key={idx} sx={{ mt: 2 }}>
-                  <Grid2 size={6}>
+                <Grid2 container key={idx} direction={"column"}>
+                  <Grid2 size={12}>
                     <TextField
                       placeholder="Enter Distance"
                       variant="standard"
@@ -300,8 +300,9 @@ export function StockYardages() {
                       sx={{
                         "& .MuiInputBase-root": {
                           borderBottom: "none",
-                          fontSize: "40px",
+                          fontSize: "60px",
                           color: "#FFFFFF",
+                          ml: isMobile ? 0 : 1,
                         },
                         "& .MuiInput-underline:before": {
                           borderBottom: "none",
@@ -315,22 +316,19 @@ export function StockYardages() {
                         "& .MuiInputBase-input::placeholder": {
                           fontSize: "20px",
                         },
-                        borderRight: "1px solid #2a3c3c",
-                        marginRight: "10px",
-                        borderSpacing: "0 10px",
                       }}
                     />
                     <Typography
                       sx={{
                         textAlign: "center",
-                        pr: 1.5,
                         color: "#778486",
+                        fontSize: "20px",
                       }}
                     >
                       Carry Distance
                     </Typography>
                   </Grid2>
-                  <Grid2 size={6}>
+                  <Grid2 size={12}>
                     <TextField
                       placeholder="Enter Distance"
                       variant="standard"
@@ -347,8 +345,9 @@ export function StockYardages() {
                       sx={{
                         "& .MuiInputBase-root": {
                           borderBottom: "none",
-                          fontSize: "40px",
+                          fontSize: "60px",
                           color: "#FFFFFF",
+                          ml: isMobile ? 0 : 1,
                         },
                         "& .MuiInput-underline:before": {
                           borderBottom: "none",
@@ -367,8 +366,8 @@ export function StockYardages() {
                     <Typography
                       sx={{
                         textAlign: "center",
-                        pr: 1.5,
                         color: "#778486",
+                        fontSize: "20px",
                       }}
                     >
                       Total Distance

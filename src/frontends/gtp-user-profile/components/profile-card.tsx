@@ -4,7 +4,6 @@ import {
   CardContent,
   List,
   ListItemButton,
-  ListItemText,
   Typography,
   Box,
   Grid2,
@@ -15,8 +14,8 @@ import {
   Button,
   Avatar,
   IconButton,
-  ListItem,
   Tooltip,
+  Drawer,
 } from "@mui/material";
 import { auth, db } from "../../../shared/Auth/services/firebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
@@ -223,6 +222,7 @@ export default function ProfileCard() {
           boxShadow: "none",
           ml: "20%",
           overflow: "auto",
+          width: "100%",
         }}
       >
         <CardContent>

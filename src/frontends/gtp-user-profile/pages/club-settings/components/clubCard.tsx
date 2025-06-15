@@ -16,11 +16,11 @@ const ClubCard: React.FC<ClubCardProps> = ({ clubData }) => {
   };
 
   return (
-    <Grid2 size={6}>
+    <Grid2 size={3} sx={{ display: "flex", justifyContent: "center" }}>
       <Card
         sx={{
-          width: "440px",
-          height: "230px",
+          width: "400px",
+          height: "270px",
           backgroundColor: "#FFFFFF",
           borderRadius: 4,
           boxShadow:

@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.14](https://github.com/BradleyRushforth/golftrackpro/compare/v0.1.13...v0.1.14) (2025-06-15)
+
+
+### Bug Fixes
+
+* made profile section + add course dialog to be responsive ([34c8792](https://github.com/BradleyRushforth/golftrackpro/commit/34c87926a8023db372c5c3051f1d2195582d11b3))
+
 ### [0.1.13](https://github.com/BradleyRushforth/golftrackpro/compare/v0.1.12...v0.1.13) (2025-06-15)
 
 

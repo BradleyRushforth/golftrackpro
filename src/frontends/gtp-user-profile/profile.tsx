@@ -28,6 +28,7 @@ import { auth, db } from "../../shared/Auth/services/firebaseConfig";
 import CustomTooltip from "../../shared/utils/customTooltip";
 import ProfileSettings from "./pages/profile-settings/profile-settings";
 import ClubSettings from "./pages/club-settings/club-settings";
+import SettingsIcon from "@mui/icons-material/Settings";
 
 const drawerWidth = 305;
 
@@ -184,7 +185,7 @@ const Profile: React.FC = () => {
                 }}
               >
                 <ListItemIcon>
-                  <AccountCircleIcon
+                  <SettingsIcon
                     sx={{
                       color:
                         selectedOption === "profile" ? "#183D26" : "#000000",

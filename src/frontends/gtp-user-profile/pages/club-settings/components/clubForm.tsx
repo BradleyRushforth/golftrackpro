@@ -56,7 +56,7 @@ const ClubForm: React.FC<ClubFormProps> = ({
         name="clubModel"
         fullWidth
         value={newClub.clubModel}
-        onChange={(e) => setNewClub({ ...newClub, clubModel: e.target.value })}
+        onChange={(e) => setNewClub({ ...newClub, clubModel: e.target.value })} 
       />
       {newClub.clubType && renderClubOptions()}
     </DialogContent>

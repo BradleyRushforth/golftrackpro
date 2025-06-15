@@ -58,7 +58,7 @@ const ClubSettings: React.FC = () => {
 
   const renderClubOptions = () => {
     return (
-      <Stack direction={"row"}>
+      <Stack direction="row" sx={{ flexWrap: "wrap", mt: 2 }}>
         {newClub.clubType && (
           <ClubOptions
             clubType={newClub.clubType}
@@ -191,7 +191,12 @@ const ClubSettings: React.FC = () => {
         {RenderClubCards()}
       </Grid2>
 
-      <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
+      <Dialog
+        open={openDialog}
+        onClose={() => setOpenDialog(false)}
+        maxWidth="md"
+        fullWidth
+      >
         <DialogTitle>Add a New Club</DialogTitle>
         <ClubForm
           newClub={newClub}

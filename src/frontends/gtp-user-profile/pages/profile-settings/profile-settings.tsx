@@ -1,10 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { TextField, Button, Grid2, Typography, Box } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Grid2,
+  Typography,
+  Box,
+  useTheme,
+  useMediaQuery,
+} from "@mui/material";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { auth, db } from "../../../../shared/Auth/services/firebaseConfig";
 import DateOfBirthField from "../../utils/dateOfBirthField";
 
 const ProfileSettings = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
   const user = auth.currentUser;
 
   const [form, setForm] = useState({
@@ -111,6 +122,8 @@ const ProfileSettings = () => {
   const font = {
     fontFamily: "'Spline Sans', sans-serif",
     color: "#183D26",
+    mb: "8px",
+    pl: 1,
   };
 
   const textFieldFontStyles = {
@@ -120,34 +133,30 @@ const ProfileSettings = () => {
     "& .MuiInputLabel-root": {
       fontFamily: "'Spline Sans', sans-serif",
     },
+    width: isMobile ? "220px" : "100%",
   };
 
   return (
     <Grid2
       container
-      spacing={2}
       sx={{
-        mt: 6,
-        display: "grid",
+        mt: isMobile ? 2 : 6,
+        display: "column",
         ml: "18%",
-        gridTemplateColumns: "1fr 1fr 1fr",
-        gap: 6,
-        backgroundColor: "#F5F5F5",
+        backgroundColor: "#FFFFFF",
         borderRadius: 5,
         width: "80%",
         p: 5,
-        pb: 8,
       }}
     >
-      <Grid2 container direction="column" spacing={5}>
-        <Grid2>
-          <Typography variant="h2" pl={1} mb={2} color={"#183D26"}>
+      <Grid2 container direction={isMobile ? "column" : "row"} spacing={3}>
+        <Grid2 size={12}>
+          <Typography variant="h2" pl={1} color={"#183D26"}>
             Profile
           </Typography>
-          <Typography
-            variant="body1"
-            sx={{ ...font, marginBottom: "8px", pl: 1 }}
-          >
+        </Grid2>
+        <Grid2 size={{ xs: 12, md: 4 }}>
+          <Typography variant="body1" sx={{ ...font }}>
             First Name
           </Typography>
           <TextField
@@ -163,11 +172,8 @@ const ProfileSettings = () => {
             }}
           />
         </Grid2>
-        <Grid2>
-          <Typography
-            variant="body1"
-            sx={{ ...font, marginBottom: "8px", pl: 1 }}
-          >
+        <Grid2 size={{ xs: 12, md: 4 }}>
+          <Typography variant="body1" sx={{ ...font }}>
             Last Name
           </Typography>
           <TextField
@@ -183,11 +189,8 @@ const ProfileSettings = () => {
             }}
           />
         </Grid2>
-        <Grid2>
-          <Typography
-            variant="body1"
-            sx={{ ...font, marginBottom: "8px", pl: 1 }}
-          >
+        <Grid2 size={{ xs: 12, md: 4 }}>
+          <Typography variant="body1" sx={{ ...font }}>
             Username
           </Typography>
           <TextField
@@ -203,11 +206,8 @@ const ProfileSettings = () => {
             }}
           />
         </Grid2>
-        <Grid2>
-          <Typography
-            variant="body1"
-            sx={{ ...font, marginBottom: "8px", pl: 1 }}
-          >
+        <Grid2 size={{ xs: 12, md: 4 }}>
+          <Typography variant="body1" sx={{ ...font }}>
             Email
           </Typography>
           <TextField
@@ -222,14 +222,8 @@ const ProfileSettings = () => {
             }}
           />
         </Grid2>
-      </Grid2>
-
-      <Grid2 container direction="column" spacing={5} mt={"88px"}>
-        <Grid2>
-          <Typography
-            variant="body1"
-            sx={{ ...font, marginBottom: "8px", pl: 1 }}
-          >
+        <Grid2 size={{ xs: 12, md: 4 }}>
+          <Typography variant="body1" sx={{ ...font }}>
             Mobile Number
           </Typography>
           <TextField
@@ -244,11 +238,8 @@ const ProfileSettings = () => {
             }}
           />
         </Grid2>
-        <Grid2>
-          <Typography
-            variant="body1"
-            sx={{ ...font, marginBottom: "8px", pl: 1 }}
-          >
+        <Grid2 size={{ xs: 12, md: 4 }}>
+          <Typography variant="body1" sx={{ ...font }}>
             Home Telephone
           </Typography>
           <TextField
@@ -263,11 +254,8 @@ const ProfileSettings = () => {
             }}
           />
         </Grid2>
-        <Grid2>
-          <Typography
-            variant="body1"
-            sx={{ ...font, marginBottom: "8px", pl: 1 }}
-          >
+        <Grid2 size={{ xs: 12, md: 4 }}>
+          <Typography variant="body1" sx={{ ...font }}>
             Job Title
           </Typography>
           <TextField
@@ -282,7 +270,7 @@ const ProfileSettings = () => {
             }}
           />
         </Grid2>
-        <Grid2>
+        <Grid2 size={{ xs: 12, md: 4 }}>
           <DateOfBirthField
             value={form.dateOfBirth}
             onChange={(value: any) =>
@@ -290,13 +278,8 @@ const ProfileSettings = () => {
             }
           />
         </Grid2>
-      </Grid2>
-      <Grid2 container direction="column" spacing={5} mt={"88px"}>
-        <Grid2>
-          <Typography
-            variant="body1"
-            sx={{ ...font, marginBottom: "8px", pl: 1 }}
-          >
+        <Grid2 size={{ xs: 12, md: 4 }}>
+          <Typography variant="body1" sx={{ ...font }}>
             Country
           </Typography>
           <TextField
@@ -311,11 +294,8 @@ const ProfileSettings = () => {
             }}
           />
         </Grid2>
-        <Grid2>
-          <Typography
-            variant="body1"
-            sx={{ ...font, marginBottom: "8px", pl: 1 }}
-          >
+        <Grid2 size={{ xs: 12, md: 4 }}>
+          <Typography variant="body1" sx={{ ...font }}>
             Address
           </Typography>
           <TextField
@@ -331,11 +311,8 @@ const ProfileSettings = () => {
             }}
           />
         </Grid2>
-        <Grid2>
-          <Typography
-            variant="body1"
-            sx={{ ...font, marginBottom: "8px", pl: 1 }}
-          >
+        <Grid2 size={{ xs: 12, md: 4 }}>
+          <Typography variant="body1" sx={{ ...font }}>
             Postcode
           </Typography>
           <TextField
@@ -351,11 +328,7 @@ const ProfileSettings = () => {
             }}
           />
         </Grid2>
-        <Grid2
-          sx={{
-            marginTop: "33px",
-          }}
-        >
+        <Grid2 size={{ xs: 12, md: 4 }} mt={"33px"}>
           <Button
             variant="contained"
             color="primary"

@@ -214,6 +214,7 @@ export function StockYardages() {
               boxShadow: "0 0 10px rgba(36, 53, 54, 0.6)",
               transform: "translateY(-2px)",
             },
+            zIndex: -1,
           }}
           onClick={handleSaveAll}
         >

@@ -15,6 +15,7 @@ import {
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../../shared/Auth/services/firebaseConfig";
 import { getAuth } from "@firebase/auth";
+import { DateInputWithPlaceholder } from "../utils/dateInputWithPlaceholder";
 
 interface IGolfCourseDialogProps {
   open: boolean;
@@ -40,6 +41,7 @@ export const AddNewCourseDialog: React.FC<IGolfCourseDialogProps> = ({
     fairwaysHit: "",
     greensInReg: "",
     puttsMade: "",
+    datePlayed: "",
   };
 
   const [formData, setFormData] = useState(initialFormData);
@@ -64,6 +66,9 @@ export const AddNewCourseDialog: React.FC<IGolfCourseDialogProps> = ({
         throw new Error("User not authenticated");
       }
 
+      const toNumberOrNull = (value: string) =>
+        value.trim() === "" ? null : Number(value);
+
       await addDoc(collection(db, "users", user.uid, "golfCourses"), {
         ...formData,
         totalYards: Number(formData.totalYards),
@@ -71,9 +76,10 @@ export const AddNewCourseDialog: React.FC<IGolfCourseDialogProps> = ({
         handicap: Number(formData.handicap),
         total: Number(formData.total),
         parsMade: Number(formData.parsMade),
-        fairwaysHit: Number(formData.fairwaysHit),
-        greensInReg: Number(formData.greensInReg),
-        puttsMade: Number(formData.puttsMade),
+        fairwaysHit: toNumberOrNull(formData.fairwaysHit),
+        greensInReg: toNumberOrNull(formData.greensInReg),
+        puttsMade: toNumberOrNull(formData.puttsMade),
+        datePlayed: formData.datePlayed,
         createdAt: new Date(),
       });
 
@@ -96,6 +102,7 @@ export const AddNewCourseDialog: React.FC<IGolfCourseDialogProps> = ({
         fairwaysHit: "",
         greensInReg: "",
         puttsMade: "",
+        datePlayed: "",
       });
     } catch (err) {
       console.error("Error adding golf course:", err);
@@ -129,7 +136,7 @@ export const AddNewCourseDialog: React.FC<IGolfCourseDialogProps> = ({
           sx={{ display: "flex", flexDirection: "column", gap: 2, mt: 1 }}
         >
           <Grid2 container spacing={2} mt={2}>
-            <Grid2 size={8}>
+            <Grid2 size={{ xs: 12, md: 8 }}>
               <Typography ml={1} variant="body1" sx={{ ...fontStyling }}>
                 Golf Course Name
               </Typography>
@@ -142,7 +149,17 @@ export const AddNewCourseDialog: React.FC<IGolfCourseDialogProps> = ({
                 sx={{ ...textFieldStyling }}
               />
             </Grid2>
-            <Grid2 size={4}>
+            <Grid2 size={{ xs: 6, md: 4 }}>
+              <Typography ml={1} variant="body1" sx={{ ...fontStyling }}>
+                Date Played
+              </Typography>
+              <DateInputWithPlaceholder
+                name="datePlayed"
+                value={formData.datePlayed}
+                onChange={handleChange}
+              />
+            </Grid2>
+            <Grid2 size={{ xs: 6, md: 4 }}>
               <Typography ml={1} variant="body1" sx={{ ...fontStyling }}>
                 Select Marker
               </Typography>
@@ -162,7 +179,7 @@ export const AddNewCourseDialog: React.FC<IGolfCourseDialogProps> = ({
                 ))}
               </TextField>
             </Grid2>
-            <Grid2 size={4}>
+            <Grid2 size={{ xs: 6, md: 4 }}>
               <Typography ml={1} variant="body1" sx={{ ...fontStyling }}>
                 Total Yards
               </Typography>
@@ -176,7 +193,7 @@ export const AddNewCourseDialog: React.FC<IGolfCourseDialogProps> = ({
                 sx={{ ...textFieldStyling }}
               />
             </Grid2>
-            <Grid2 size={4}>
+            <Grid2 size={{ xs: 6, md: 4 }}>
               <Typography ml={1} variant="body1" sx={{ ...fontStyling }}>
                 Slope Rating
               </Typography>
@@ -190,7 +207,7 @@ export const AddNewCourseDialog: React.FC<IGolfCourseDialogProps> = ({
                 sx={{ ...textFieldStyling }}
               />
             </Grid2>
-            <Grid2 size={4}>
+            <Grid2 size={{ xs: 6, md: 4 }}>
               <Typography ml={1} variant="body1" sx={{ ...fontStyling }}>
                 Playing Handicap
               </Typography>
@@ -204,7 +221,7 @@ export const AddNewCourseDialog: React.FC<IGolfCourseDialogProps> = ({
                 sx={{ ...textFieldStyling }}
               />
             </Grid2>
-            <Grid2 size={4}>
+            <Grid2 size={{ xs: 6, md: 4 }}>
               <Typography ml={1} variant="body1" sx={{ ...fontStyling }}>
                 Total Score
               </Typography>
@@ -218,7 +235,7 @@ export const AddNewCourseDialog: React.FC<IGolfCourseDialogProps> = ({
                 sx={{ ...textFieldStyling }}
               />
             </Grid2>
-            <Grid2 size={4}>
+            <Grid2 size={{ xs: 6, md: 4 }}>
               <Typography ml={1} variant="body1" sx={{ ...fontStyling }}>
                 Pars Made
               </Typography>
@@ -232,7 +249,7 @@ export const AddNewCourseDialog: React.FC<IGolfCourseDialogProps> = ({
                 sx={{ ...textFieldStyling }}
               />
             </Grid2>
-            <Grid2 size={4}>
+            <Grid2 size={{ xs: 6, md: 4 }}>
               <Typography ml={1} variant="body1" sx={{ ...fontStyling }}>
                 FIR
               </Typography>
@@ -246,7 +263,7 @@ export const AddNewCourseDialog: React.FC<IGolfCourseDialogProps> = ({
                 sx={{ ...textFieldStyling }}
               />
             </Grid2>
-            <Grid2 size={4}>
+            <Grid2 size={{ xs: 6, md: 4 }}>
               <Typography ml={1} variant="body1" sx={{ ...fontStyling }}>
                 GIR
               </Typography>
@@ -260,7 +277,7 @@ export const AddNewCourseDialog: React.FC<IGolfCourseDialogProps> = ({
                 sx={{ ...textFieldStyling }}
               />
             </Grid2>
-            <Grid2 size={4}>
+            <Grid2 size={{ xs: 6, md: 4 }}>
               <Typography ml={1} variant="body1" sx={{ ...fontStyling }}>
                 Putts Made
               </Typography>

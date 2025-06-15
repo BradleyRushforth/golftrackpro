@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
-  Card,
   CardContent,
-  List,
   ListItemButton,
   Typography,
   Box,
@@ -18,21 +16,26 @@ import {
   Toolbar,
   ListItem,
   ListItemIcon,
+  List,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SportsGolfIcon from "@mui/icons-material/SportsGolf";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { auth, db } from "../../shared/Auth/services/firebaseConfig";
 import CustomTooltip from "../../shared/utils/customTooltip";
-import ProfileSettings from "./pages/profile-settings/profile-settings";
 import ClubSettings from "./pages/club-settings/club-settings";
 import SettingsIcon from "@mui/icons-material/Settings";
+import ProfileSettings from "./pages/profile-settings/profile-settings";
 
 const drawerWidth = 305;
 
 const Profile: React.FC = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
   const [selectedOption, setSelectedOption] = useState<"profile" | "clubs">(
     "profile"
   );
@@ -113,13 +116,14 @@ const Profile: React.FC = () => {
       <Drawer
         variant="permanent"
         sx={{
-          width: drawerWidth,
+          width: isMobile ? 70 : drawerWidth,
           flexShrink: 0,
           [`& .MuiDrawer-paper`]: {
-            width: drawerWidth,
+            width: isMobile ? 70 : drawerWidth,
             boxSizing: "border-box",
             top: "80px",
           },
+          height: "100%",
         }}
       >
         <Toolbar />
@@ -137,38 +141,46 @@ const Profile: React.FC = () => {
               <Avatar
                 src={profilePicture || "/assets/avatars/default.jpg"}
                 alt="User Avatar"
-                sx={{ width: 100, height: "auto", mb: 2 }}
+                sx={{
+                  width: isMobile ? 50 : 100,
+                  height: isMobile ? 50 : "auto",
+                  mb: 2,
+                }}
               />
-              <CustomTooltip title={"Change Avatar"}>
-                <IconButton
-                  onClick={() => setOpenDialog(true)}
-                  sx={{
-                    position: "absolute",
-                    bottom: 0,
-                    right: 0,
-                    backgroundColor: "white",
-                    borderRadius: "50%",
-                    boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.3)",
-                    "&:hover": {
-                      backgroundColor: "#C8E6C9",
-                    },
-                  }}
-                >
-                  <CameraAltIcon
+              {!isMobile && (
+                <CustomTooltip title={"Change Avatar"}>
+                  <IconButton
+                    onClick={() => setOpenDialog(true)}
                     sx={{
-                      color: "#183D26",
+                      position: "absolute",
+                      bottom: 0,
+                      right: 0,
+                      backgroundColor: "white",
+                      borderRadius: "50%",
+                      boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.3)",
+                      "&:hover": {
+                        backgroundColor: "#C8E6C9",
+                      },
                     }}
-                  />
-                </IconButton>
-              </CustomTooltip>
+                  >
+                    <CameraAltIcon
+                      sx={{
+                        color: "#183D26",
+                      }}
+                    />
+                  </IconButton>
+                </CustomTooltip>
+              )}
             </Box>
-            <Typography
-              variant="h4"
-              gutterBottom
-              sx={{ color: "#000000", mt: 2 }}
-            >
-              Welcome, {firstName || "Loading..."}
-            </Typography>
+            {!isMobile && (
+              <Typography
+                variant="h4"
+                gutterBottom
+                sx={{ color: "#000000", mt: 2 }}
+              >
+                Welcome, {firstName || "Loading..."}
+              </Typography>
+            )}
           </Box>
           <List>
             <ListItem disablePadding>
@@ -189,16 +201,20 @@ const Profile: React.FC = () => {
                     sx={{
                       color:
                         selectedOption === "profile" ? "#183D26" : "#000000",
-                      pr: 1,
+                      pr: isMobile ? 0 : 1,
                       pt: "3px",
                     }}
                   />
-                  <Typography
-                    variant="h6"
-                    color={selectedOption === "profile" ? "#183D26" : "#000000"}
-                  >
-                    Profile Settings
-                  </Typography>
+                  {!isMobile && (
+                    <Typography
+                      variant="h6"
+                      color={
+                        selectedOption === "profile" ? "#183D26" : "#000000"
+                      }
+                    >
+                      Profile Settings
+                    </Typography>
+                  )}
                 </ListItemIcon>
               </ListItemButton>
             </ListItem>
@@ -217,17 +233,19 @@ const Profile: React.FC = () => {
               <ListItemIcon>
                 <SportsGolfIcon
                   sx={{
-                    color: selectedOption === "profile" ? "#183D26" : "#000000",
-                    pr: 1,
+                    color: selectedOption === "clubs" ? "#183D26" : "#000000",
+                    pr: isMobile ? 0 : 1,
                     pt: "3px",
                   }}
                 />
-                <Typography
-                  variant="h6"
-                  color={selectedOption === "clubs" ? "#183D26" : "#000000"}
-                >
-                  Clubs
-                </Typography>
+                {!isMobile && (
+                  <Typography
+                    variant="h6"
+                    color={selectedOption === "clubs" ? "#183D26" : "#000000"}
+                  >
+                    Clubs
+                  </Typography>
+                )}
               </ListItemIcon>
             </ListItemButton>
           </List>

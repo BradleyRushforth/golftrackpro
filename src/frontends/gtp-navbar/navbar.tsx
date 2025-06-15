@@ -88,12 +88,13 @@ export const Navbar = () => {
           margin: 0,
           width: "100%",
           height: "80px",
-          position: "absolute",
+          position: "fixed",
           top: 0,
           left: 0,
           right: 0,
           alignItems: "center",
           px: "4%",
+          zIndex: 1000,
         }}
       >
         <Grid2
@@ -120,17 +121,17 @@ export const Navbar = () => {
                 verticalAlign: "center",
               }}
             />
-              <Typography
-                sx={{
-                  fontSize: "35px",
-                  color: "#FFFFFF",
-                  letterSpacing: "2px",
-                  lineHeight: 1,
-                  p: 0,
-                }}
-              >
-                Golf Track Pro
-              </Typography>
+            <Typography
+              sx={{
+                fontSize: "35px",
+                color: "#FFFFFF",
+                letterSpacing: "2px",
+                lineHeight: 1,
+                p: 0,
+              }}
+            >
+              Golf Track Pro
+            </Typography>
           </Button>
         </Grid2>
 

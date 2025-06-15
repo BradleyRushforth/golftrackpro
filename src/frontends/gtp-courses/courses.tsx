@@ -5,6 +5,8 @@ import {
   Divider,
   Grid2,
   IconButton,
+  MenuItem,
+  Select,
   Tooltip,
   Typography,
 } from "@mui/material";
@@ -16,12 +18,17 @@ import { query, collection, getDocs } from "@firebase/firestore";
 import { db } from "../../shared/Auth/services/firebaseConfig";
 import "@fontsource-variable/inter";
 import CustomTooltip from "../../shared/utils/customTooltip";
+import { sortCourses } from "./utils/sortCourses";
+import useLocalStorage from "../../hooks/useLocalStorage/useLocalStorage";
+import { formattedDate } from "../../shared/utils/formattedDate";
 
 const Courses = () => {
   const [openDialog, setOpenDialog] = useState(false);
 
   const [courses, setCourses] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+
+  const [filter, setFilter] = useLocalStorage("sortPreference", "alpha");
 
   const fetchCourses = async () => {
     const auth = getAuth();
@@ -71,6 +78,8 @@ const Courses = () => {
   const handleOpen = () => setOpenDialog(true);
   const handleClose = () => setOpenDialog(false);
 
+  const sortedCourses = sortCourses(courses, filter);
+
   return (
     <Grid2 container spacing={2} sx={{ px: "4%", pt: "1%", mb: "5%" }}>
       <Grid2
@@ -97,6 +106,35 @@ const Courses = () => {
         >
           Courses
         </Typography>
+
+        <Select
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
+          size="small"
+          sx={{
+            color: "#FFFFFF",
+            backgroundColor: "#192729",
+            ml: 2,
+            minWidth: 220,
+            svg: {
+              color: "#FFFFFF",
+            },
+            "& .MuiOutlinedInput-notchedOutline": {
+              borderColor: "#2a3a3b",
+            },
+            "&:hover .MuiOutlinedInput-notchedOutline": {
+              borderColor: "#2f4849",
+            },
+            "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+              borderColor: "#2f4849",
+            },
+          }}
+        >
+          <MenuItem value="alpha">Alphabetical</MenuItem>
+          <MenuItem value="recent">Recently Added</MenuItem>
+          <MenuItem value="lowest">Lowest Score</MenuItem>
+          <MenuItem value="highest">Highest Score</MenuItem>
+        </Select>
 
         <CustomTooltip title="Add New Course">
           <IconButton
@@ -127,7 +165,7 @@ const Courses = () => {
         />
       </Grid2>
 
-      {courses.map((course) => {
+      {sortedCourses.map((course) => {
         const rows = [
           {
             label: "Pars Made",
@@ -135,11 +173,13 @@ const Courses = () => {
           },
           {
             label: "Fairways Hit",
-            value: course?.fairwaysHit ?? "N/A",
+            value:
+              course?.fairwaysHit != null ? `${course.fairwaysHit}%` : "N/A",
           },
           {
             label: "Greens in Reg",
-            value: course?.greensInReg ?? "N/A",
+            value:
+              course?.greensInReg != null ? `${course.greensInReg}%` : "N/A",
           },
           {
             label: "Putts Made",
@@ -158,10 +198,22 @@ const Courses = () => {
                 backgroundColor: "#132122",
                 borderRadius: 8,
                 border: "0.5px solid #2a3a3b",
-                height: "420px",
+                height: "440px",
               }}
             >
               <CardContent>
+                <Grid2 size={12} display={"flex"} justifyContent={"flex-start"}>
+                  <Typography
+                    sx={{
+                      fontFamily: '"Inter Variable", sans-serif',
+                      fontWeight: 200,
+                      fontSize: "14px",
+                      color: "#FFFFFF",
+                    }}
+                  >
+                    {formattedDate(course.datePlayed)}
+                  </Typography>
+                </Grid2>
                 <Grid2 container alignItems={"center"}>
                   <Grid2
                     size={9}
@@ -194,7 +246,6 @@ const Courses = () => {
                           border: "2px solid #4CAF50",
                           borderRadius: "50%",
                         }}
-                        mb={1}
                       >
                         <Typography
                           variant="h5"
@@ -312,65 +363,6 @@ const Courses = () => {
                     ))}
                   </Grid2>
                 </Grid2>
-                {/* <Grid2 container>
-                  <Grid2 size={6}>
-                    <Box
-                      sx={{
-                        borderRight: "1px solid #ccc",
-                        pr: 2,
-                        height: "100%",
-                      }}
-                    >
-                      {rows.map((row, index) => (
-                        <Box
-                          key={index}
-                          display="flex"
-                          justifyContent="space-between"
-                          alignItems="center"
-                          sx={{ py: 1 }}
-                        >
-                          <Typography variant={"h6"} sx={{ color: "#FFFFFF" }}>
-                            {row.leftLabel}
-                          </Typography>
-                          <Typography
-                            variant="h6"
-                            fontWeight={300}
-                            fontFamily={"Montserrat, sans-serif"}
-                            sx={{ color: "#FFFFFF" }}
-                          >
-                            {row.leftValue}
-                          </Typography>
-                        </Box>
-                      ))}
-                    </Box>
-                  </Grid2>
-
-                  <Grid2 size={6}>
-                    <Box sx={{ pl: 2 }}>
-                      {rows.map((row, index) => (
-                        <Box
-                          key={index}
-                          display="flex"
-                          justifyContent="space-between"
-                          alignItems="center"
-                          sx={{ py: 1 }}
-                        >
-                          <Typography variant="h6" sx={{ color: "#FFFFFF" }}>
-                            {row.rightLabel}
-                          </Typography>
-                          <Typography
-                            variant="h6"
-                            fontWeight={300}
-                            fontFamily={"Montserrat, sans-serif"}
-                            sx={{ color: "#FFFFFF" }}
-                          >
-                            {row.rightValue}
-                          </Typography>
-                        </Box>
-                      ))}
-                    </Box>
-                  </Grid2>
-                </Grid2> */}
               </CardContent>
             </Card>
           </Grid2>

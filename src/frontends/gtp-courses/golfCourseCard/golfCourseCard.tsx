@@ -15,6 +15,7 @@ interface CourseData {
   yardage: string;
   slopeRating: number;
   total: number;
+  datePlayed: string;
   statRows: {
     leftLabel: string;
     leftValue: string;
@@ -51,6 +52,7 @@ const GolfCourseCard = () => {
             statRows: course.stats || [],
             slopeRating: slopeRating,
             total: total,
+            datePlayed: course.datePlayed,
           });
         } else {
           console.error("Men's White Tees not found!");
@@ -89,9 +91,10 @@ const GolfCourseCard = () => {
       <CardContent>
         <Grid2 container>
           <Grid2 size={9} display={"flex"} justifyContent={"flex-start"}>
-            <Typography variant="h4" sx={{ maxWidth: "20ch" }}>
+            {/* <Typography variant="h4" sx={{ maxWidth: "20ch" }}>
               {courseData.name}
-            </Typography>
+            </Typography> */}
+            <Typography>{courseData.datePlayed}</Typography>
           </Grid2>
           <Grid2
             size={3}

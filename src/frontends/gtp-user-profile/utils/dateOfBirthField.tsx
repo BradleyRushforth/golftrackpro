@@ -1,5 +1,5 @@
 import React from "react";
-import { TextField, Typography } from "@mui/material";
+import { TextField, Typography, useMediaQuery, useTheme } from "@mui/material";
 
 interface DateOfBirthFieldProps {
   value: string;
@@ -10,6 +10,9 @@ const DateOfBirthField: React.FC<DateOfBirthFieldProps> = ({
   value,
   onChange,
 }) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
   const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let val = event.target.value;
 
@@ -53,6 +56,7 @@ const DateOfBirthField: React.FC<DateOfBirthFieldProps> = ({
         sx={{
           "& .MuiInputBase-input": { fontFamily: "'Spline Sans', sans-serif" },
           "& .MuiInputLabel-root": { fontFamily: "'Spline Sans', sans-serif" },
+          width: isMobile ? "220px" : "100%",
         }}
       />
     </>
